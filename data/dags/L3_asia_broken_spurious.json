@@ -1,0 +1,47 @@
+{
+  "id": "L3_asia_broken_spurious",
+  "level": 3,
+  "pattern": "broken — spurious edge",
+  "pattern_description": "BROKEN DAG (SPURIOUS EDGE): Identical to DAG #9 with one extra edge added (Visit to Asia → Lung Cancer). Tests whether the LLM can identify a causal claim that is not supported by domain knowledge — visiting Asia does not directly cause lung cancer.",
+  "difficulty_notes": "Critique task. The flaw is an unjustified edge. The model must recognize that while the rest of the graph is plausible, this particular claim is unsupported and should explain why.",
+  "domain": "medical",
+  "description": "A modified version of the Asia network with a spurious edge added: this graph incorrectly claims that visiting Asia directly causes Lung Cancer.",
+  "nodes": [
+    "Visit to Asia",
+    "Tuberculosis",
+    "Smoking",
+    "Lung Cancer",
+    "Bronchitis",
+    "TB or Cancer",
+    "X-Ray Result",
+    "Dyspnoea"
+  ],
+  "edges": [
+    ["Visit to Asia", "Tuberculosis"],
+    ["Visit to Asia", "Lung Cancer"],
+    ["Smoking", "Lung Cancer"],
+    ["Smoking", "Bronchitis"],
+    ["Tuberculosis", "TB or Cancer"],
+    ["Lung Cancer", "TB or Cancer"],
+    ["TB or Cancer", "X-Ray Result"],
+    ["TB or Cancer", "Dyspnoea"],
+    ["Bronchitis", "Dyspnoea"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "This graph contains a spurious causal edge",
+      "Visiting Asia is associated with tuberculosis exposure but is not a known direct cause of lung cancer"
+    ],
+    "counterfactual": {
+      "intervention": "Not applicable — the graph contains a structural error",
+      "expected_outcome": "Any counterfactual involving travel to Asia would overestimate the effect on lung cancer because of the spurious edge"
+    },
+    "flaws": [
+      {
+        "type": "spurious_edge",
+        "edge": ["Visit to Asia", "Lung Cancer"],
+        "explanation": "There is no established causal mechanism linking travel to Asia directly to lung cancer. The original Asia DAG includes this travel variable specifically as a tuberculosis risk factor, not a cancer risk factor. This added edge has no biological justification."
+      }
+    ]
+  }
+}

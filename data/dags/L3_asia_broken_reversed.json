@@ -1,0 +1,47 @@
+{
+  "id": "L3_asia_broken_reversed",
+  "level": 3,
+  "pattern": "broken — reversed causality",
+  "pattern_description": "BROKEN DAG (REVERSED EDGE): Identical to DAG #9 except the edge between Smoking and Lung Cancer is reversed (Lung Cancer → Smoking). Tests whether the LLM can detect causally implausible directions based on domain knowledge — cancer cannot cause someone to start smoking.",
+  "difficulty_notes": "Critique task. The flaw is detectable through domain reasoning rather than graph structure alone. A strong model should flag the reversed edge and explain why it contradicts known mechanisms.",
+  "domain": "medical",
+  "description": "A modified version of the Asia network with a deliberately reversed causal edge: this graph claims that Lung Cancer causes Smoking, which is biologically implausible.",
+  "nodes": [
+    "Visit to Asia",
+    "Tuberculosis",
+    "Smoking",
+    "Lung Cancer",
+    "Bronchitis",
+    "TB or Cancer",
+    "X-Ray Result",
+    "Dyspnoea"
+  ],
+  "edges": [
+    ["Visit to Asia", "Tuberculosis"],
+    ["Lung Cancer", "Smoking"],
+    ["Smoking", "Bronchitis"],
+    ["Tuberculosis", "TB or Cancer"],
+    ["Lung Cancer", "TB or Cancer"],
+    ["TB or Cancer", "X-Ray Result"],
+    ["TB or Cancer", "Dyspnoea"],
+    ["Bronchitis", "Dyspnoea"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "This graph contains a reversed causal edge",
+      "Lung Cancer cannot cause someone to start smoking — the temporal and biological direction is opposite"
+    ],
+    "counterfactual": {
+      "intervention": "Not applicable — the graph contains a structural error",
+      "expected_outcome": "Counterfactual reasoning on this graph would produce misleading results because of the reversed edge"
+    },
+    "flaws": [
+      {
+        "type": "reversed_edge",
+        "edge": ["Lung Cancer", "Smoking"],
+        "correct_version": ["Smoking", "Lung Cancer"],
+        "explanation": "Smoking is a well-established cause of lung cancer. The reverse direction is biologically implausible — having lung cancer does not cause people to take up smoking. A correct DAG should have Smoking → Lung Cancer."
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "L3_asia_correct",
+  "level": 3,
+  "pattern": "complex multi-path with collider",
+  "pattern_description": "COMPLEX REAL-WORLD DAG: The classic Asia network from medical diagnostics. Combines multiple patterns simultaneously — chains, mediation, a collider ('TB or Cancer'), and parallel paths to a shared symptom. Tests whether the LLM can handle a realistic medical reasoning structure with 8 nodes and multiple interacting pathways.",
+  "difficulty_notes": "Hard. 8 nodes, 8 edges. The benchmark DAG used throughout causal inference literature (Lauritzen & Spiegelhalter, 1988). Tests integrated reasoning across multiple substructures. This is the reference graph against which the broken variants (DAGs 10-12) are compared.",
+  "domain": "medical",
+  "description": "Diagnostic network for respiratory conditions. Smoking causes both lung cancer and bronchitis. Visiting Asia increases tuberculosis risk. Lung cancer and tuberculosis are grouped into 'TB or Cancer' because they show similar symptoms and X-ray patterns. The patient may experience dyspnoea (shortness of breath) due to either bronchitis or TB or Cancer.",
+  "nodes": [
+    "Visit to Asia",
+    "Tuberculosis",
+    "Smoking",
+    "Lung Cancer",
+    "Bronchitis",
+    "TB or Cancer",
+    "X-Ray Result",
+    "Dyspnoea"
+  ],
+  "edges": [
+    ["Visit to Asia", "Tuberculosis"],
+    ["Smoking", "Lung Cancer"],
+    ["Smoking", "Bronchitis"],
+    ["Tuberculosis", "TB or Cancer"],
+    ["Lung Cancer", "TB or Cancer"],
+    ["TB or Cancer", "X-Ray Result"],
+    ["TB or Cancer", "Dyspnoea"],
+    ["Bronchitis", "Dyspnoea"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Smoking is a root cause leading to both Lung Cancer and Bronchitis",
+      "Visit to Asia is an independent root cause leading to Tuberculosis",
+      "TB or Cancer is a collider receiving inputs from both Tuberculosis and Lung Cancer",
+      "Dyspnoea has two causes: Bronchitis and TB or Cancer",
+      "X-Ray Result is determined only by TB or Cancer",
+      "There is no direct edge from Smoking to Dyspnoea — it flows indirectly through Bronchitis or through Lung Cancer → TB or Cancer",
+      "Tuberculosis affects Dyspnoea and X-Ray Result only through the TB or Cancer node"
+    ],
+    "counterfactual": {
+      "intervention": "A patient quits smoking entirely",
+      "expected_outcome": "Lung Cancer risk decreases, which reduces the likelihood of being in the TB or Cancer category, which in turn reduces both X-Ray abnormalities and Dyspnoea via that pathway. Bronchitis risk also decreases, further reducing Dyspnoea. Tuberculosis remains unaffected because it depends only on travel history."
+    },
+    "flaws": []
+  }
+}

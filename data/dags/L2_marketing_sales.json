@@ -1,0 +1,29 @@
+{
+  "id": "L2_marketing_sales",
+  "level": 2,
+  "pattern": "multi-path",
+  "pattern_description": "MULTIPLE CAUSAL PATHS: The cause (Marketing Spend) reaches the outcome (Sales) through both a direct effect and an indirect effect via a mediator (Brand Awareness). Tests whether the LLM can decompose total effect into direct and indirect components — a core skill in mediation analysis.",
+  "difficulty_notes": "Medium. 4 nodes, 4 edges. Introduces the concept of partial mediation. A weak model will mention only one of the two paths or will fail to distinguish direct from indirect effects.",
+  "domain": "business",
+  "description": "Marketing spend increases sales both directly (e.g. through promotions and discounts) and indirectly by building brand awareness, which in turn drives sales. Seasonality independently affects sales.",
+  "nodes": ["Marketing Spend", "Brand Awareness", "Seasonality", "Sales"],
+  "edges": [
+    ["Marketing Spend", "Brand Awareness"],
+    ["Marketing Spend", "Sales"],
+    ["Brand Awareness", "Sales"],
+    ["Seasonality", "Sales"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Marketing Spend affects Sales through two paths: a direct path and an indirect path through Brand Awareness",
+      "Brand Awareness is a partial mediator",
+      "Seasonality is an independent cause of Sales, unrelated to marketing",
+      "The total effect of Marketing on Sales is the sum of the direct effect plus the indirect effect via Brand Awareness"
+    ],
+    "counterfactual": {
+      "intervention": "Marketing spend is doubled",
+      "expected_outcome": "Sales increase via two mechanisms: directly through immediate promotional effects, and indirectly through increased brand awareness over time. Seasonality is unaffected."
+    },
+    "flaws": []
+  }
+}

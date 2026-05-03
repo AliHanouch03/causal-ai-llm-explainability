@@ -1,0 +1,27 @@
+{
+  "id": "L1_icecream_drowning",
+  "level": 1,
+  "pattern": "fork",
+  "pattern_description": "FORK / CONFOUNDER (A ← C → B): A common cause C influences both A and B, creating a spurious correlation between A and B even though neither causes the other. Tests whether the LLM understands that correlation is not causation, and whether it can identify the confounder as the real driver.",
+  "difficulty_notes": "Easy. 3 nodes, 2 edges. The classic 'ice cream sales correlate with drownings' example. A model that fails here will incorrectly infer a direct causal link between A and B.",
+  "domain": "everyday",
+  "description": "Hot weather independently causes both higher ice cream sales and more drownings. Ice cream and drownings are correlated but not causally related.",
+  "nodes": ["Hot Weather", "Ice Cream Sales", "Drownings"],
+  "edges": [
+    ["Hot Weather", "Ice Cream Sales"],
+    ["Hot Weather", "Drownings"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Hot Weather is a common cause (confounder) of both ice cream sales and drownings",
+      "Ice cream sales and drownings are correlated but not causally linked",
+      "Banning ice cream would not reduce drownings",
+      "The apparent connection between ice cream and drownings is spurious"
+    ],
+    "counterfactual": {
+      "intervention": "Ice cream sales are banned entirely",
+      "expected_outcome": "Drowning rates would not change because ice cream is not a cause of drowning. Both are independently driven by hot weather."
+    },
+    "flaws": []
+  }
+}

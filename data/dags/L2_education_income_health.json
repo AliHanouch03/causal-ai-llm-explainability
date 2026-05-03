@@ -1,0 +1,30 @@
+{
+  "id": "L2_education_income_health",
+  "level": 2,
+  "pattern": "confounder + mediator",
+  "pattern_description": "CONFOUNDER + MEDIATOR: A confounder (Family Background) influences both the cause (Education) and the outcome (Health). At the same time, Income mediates part of the effect of Education on Health. Tests whether the LLM can simultaneously identify a confounding source of bias and a mediating mechanism in the same graph.",
+  "difficulty_notes": "Medium. 4 nodes, 4 edges. Combines two fundamental patterns. The model must distinguish between the confounding path (Family Background → Education and Family Background → Health) and the causal path (Education → Income → Health). A common failure is treating Family Background as just another cause rather than recognizing its role as a confounder.",
+  "domain": "social",
+  "description": "Education affects health partly directly and partly through income. Family background is a confounder that independently affects both education and health.",
+  "nodes": ["Family Background", "Education", "Income", "Health"],
+  "edges": [
+    ["Family Background", "Education"],
+    ["Family Background", "Health"],
+    ["Education", "Income"],
+    ["Income", "Health"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Family Background is a confounder of Education and Health",
+      "Income is a mediator of the Education-Health relationship",
+      "The total effect of Education on Health flows through Income",
+      "Without controlling for Family Background, the apparent effect of Education on Health would be biased upward",
+      "There is no direct edge from Education to Health in this model — the effect is fully mediated by Income"
+    ],
+    "counterfactual": {
+      "intervention": "A policy increases everyone's education level by 2 years, independent of family background",
+      "expected_outcome": "Income increases as a result, and through income, health improves. Family background remains unchanged. The effect on health is fully mediated through income."
+    },
+    "flaws": []
+  }
+}

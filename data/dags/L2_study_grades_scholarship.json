@@ -1,0 +1,31 @@
+{
+  "id": "L2_study_grades_scholarship",
+  "level": 2,
+  "pattern": "fork + collider",
+  "pattern_description": "FORK + COLLIDER: Combines a confounder (Intelligence influences both Study Hours and Grades) with a collider (Scholarship is caused by both Grades and Athletic Ability). Tests whether the LLM can identify two distinct bias structures in the same graph and reason about how each affects observed correlations.",
+  "difficulty_notes": "Medium-hard. 5 nodes, 5 edges. Requires the model to handle two non-trivial structures at once. A common failure is to identify only the confounder and miss the collider, or vice versa.",
+  "domain": "education",
+  "description": "Intelligence affects both study habits and grades (confounder). Grades and athletic ability both contribute to receiving a scholarship (collider).",
+  "nodes": ["Intelligence", "Study Hours", "Grades", "Athletic Ability", "Scholarship"],
+  "edges": [
+    ["Intelligence", "Study Hours"],
+    ["Intelligence", "Grades"],
+    ["Study Hours", "Grades"],
+    ["Grades", "Scholarship"],
+    ["Athletic Ability", "Scholarship"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Intelligence is a confounder of Study Hours and Grades",
+      "Scholarship is a collider influenced by both Grades and Athletic Ability",
+      "Study Hours has a direct causal effect on Grades, on top of the confounded relationship",
+      "Athletic Ability and Grades are independent in the general population, but among scholarship recipients they may appear negatively correlated due to collider bias",
+      "Conditioning on Scholarship would create a spurious association between Grades and Athletic Ability"
+    ],
+    "counterfactual": {
+      "intervention": "A student doubles their study hours",
+      "expected_outcome": "Grades improve, and as a result, the chance of receiving a scholarship increases. Intelligence and athletic ability are not affected by this intervention."
+    },
+    "flaws": []
+  }
+}

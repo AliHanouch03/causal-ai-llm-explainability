@@ -1,0 +1,51 @@
+{
+  "id": "L3_asia_broken_missing",
+  "level": 3,
+  "pattern": "broken — missing confounder",
+  "pattern_description": "BROKEN DAG (MISSING VARIABLE): A variant of the Asia network missing an important confounder — Air Pollution, which independently affects both Lung Cancer and Bronchitis. Tests whether the LLM can identify when a graph omits an important causal factor that would change interpretation of the existing relationships.",
+  "difficulty_notes": "Critique task — the hardest type of flaw to detect because there is no incorrect edge to flag, only an absent one. The model must reason about what variables *should* be in the graph based on domain knowledge.",
+  "domain": "medical",
+  "description": "A modified version of the Asia network that omits Air Pollution, a known confounder that affects both Lung Cancer and Bronchitis. Without this variable, the graph attributes all variation in lung cancer and bronchitis to smoking alone.",
+  "nodes": [
+    "Visit to Asia",
+    "Tuberculosis",
+    "Smoking",
+    "Lung Cancer",
+    "Bronchitis",
+    "TB or Cancer",
+    "X-Ray Result",
+    "Dyspnoea"
+  ],
+  "edges": [
+    ["Visit to Asia", "Tuberculosis"],
+    ["Smoking", "Lung Cancer"],
+    ["Smoking", "Bronchitis"],
+    ["Tuberculosis", "TB or Cancer"],
+    ["Lung Cancer", "TB or Cancer"],
+    ["TB or Cancer", "X-Ray Result"],
+    ["TB or Cancer", "Dyspnoea"],
+    ["Bronchitis", "Dyspnoea"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "This graph is missing an important confounder",
+      "Air Pollution is a known cause of both lung cancer and bronchitis but is not represented",
+      "Without this variable, the apparent effect of smoking on lung cancer and bronchitis is overestimated"
+    ],
+    "counterfactual": {
+      "intervention": "Not applicable — the graph omits a relevant variable",
+      "expected_outcome": "Counterfactual reasoning that does not account for air pollution will overestimate the effect of smoking interventions"
+    },
+    "flaws": [
+      {
+        "type": "missing_confounder",
+        "missing_variable": "Air Pollution",
+        "should_have_edges": [
+          ["Air Pollution", "Lung Cancer"],
+          ["Air Pollution", "Bronchitis"]
+        ],
+        "explanation": "Air pollution is an established environmental cause of both lung cancer and bronchitis. Omitting it from the graph means smoking absorbs all the explanatory weight for these conditions, which biases any causal estimates derived from the graph."
+      }
+    ]
+  }
+}

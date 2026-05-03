@@ -1,0 +1,27 @@
+{
+  "id": "L1_smoking_cancer",
+  "level": 1,
+  "pattern": "chain",
+  "pattern_description": "CHAIN (A → B → C): The simplest causal pattern. Tests whether the LLM understands that the cause affects the outcome only through the mediator, not directly. This is the baseline — if a model fails here, it does not understand causality.",
+  "difficulty_notes": "Easy. 3 nodes, 2 edges, no confounders or colliders. Used for explanation tasks with non-experts.",
+  "domain": "health",
+  "description": "Simple causal chain showing how smoking leads to cancer and then to death.",
+  "nodes": ["Smoking", "Cancer", "Death"],
+  "edges": [
+    ["Smoking", "Cancer"],
+    ["Cancer", "Death"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Smoking is the root cause in this chain",
+      "Cancer is a mediator between smoking and death",
+      "Smoking affects death only indirectly through cancer",
+      "There is no direct arrow from smoking to death"
+    ],
+    "counterfactual": {
+      "intervention": "A person stops smoking",
+      "expected_outcome": "The risk of cancer decreases, which in turn decreases the risk of death. The effect on death is indirect."
+    },
+    "flaws": []
+  }
+}

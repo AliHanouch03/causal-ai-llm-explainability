@@ -1,0 +1,31 @@
+{
+  "id": "L2_climate_crops",
+  "level": 2,
+  "pattern": "parallel mediators",
+  "pattern_description": "PARALLEL MEDIATORS: One cause (Climate Change) affects an outcome (Crop Yield) through multiple independent mediating pathways (Temperature, Rainfall, Soil Quality). Tests whether the LLM can enumerate multiple causal mechanisms operating in parallel and reason about their combined effect.",
+  "difficulty_notes": "Medium. 5 nodes, 6 edges. Tests the LLM's ability to handle multiple simultaneous mediating paths. A weak model may collapse the mediators into a single 'environmental factors' node or miss one of the pathways entirely.",
+  "domain": "environment",
+  "description": "Climate change affects crop yield through three parallel pathways: rising temperatures, changing rainfall patterns, and soil degradation. Each mediator independently influences crop yield.",
+  "nodes": ["Climate Change", "Temperature", "Rainfall", "Soil Quality", "Crop Yield"],
+  "edges": [
+    ["Climate Change", "Temperature"],
+    ["Climate Change", "Rainfall"],
+    ["Climate Change", "Soil Quality"],
+    ["Temperature", "Crop Yield"],
+    ["Rainfall", "Crop Yield"],
+    ["Soil Quality", "Crop Yield"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Climate Change affects Crop Yield through three parallel mediating pathways",
+      "Temperature, Rainfall, and Soil Quality are independent mediators",
+      "There is no direct edge from Climate Change to Crop Yield in this model — all effects are mediated",
+      "The total effect of Climate Change on Crop Yield is the combined effect of all three pathways"
+    ],
+    "counterfactual": {
+      "intervention": "Global climate change is halted",
+      "expected_outcome": "Temperature, rainfall patterns, and soil quality stabilize. As a result, crop yield stabilizes across all three pathways. Without these mediators changing, climate change would have no effect on crop yield in this model."
+    },
+    "flaws": []
+  }
+}

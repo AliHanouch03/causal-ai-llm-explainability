@@ -1,0 +1,27 @@
+{
+  "id": "L1_talent_luck_fame",
+  "level": 1,
+  "pattern": "collider",
+  "pattern_description": "COLLIDER (A → C ← B): Two independent causes A and B both influence a common effect C. A and B are unrelated in general, but conditioning on C creates a spurious negative association between them (collider bias / Berkson's paradox). Tests whether the LLM understands that conditioning on a collider can create misleading correlations.",
+  "difficulty_notes": "Easy structurally (3 nodes, 2 edges) but conceptually tricky. Many models incorrectly assume a relationship between A and B because they share an effect.",
+  "domain": "social",
+  "description": "Talent and luck both independently contribute to fame. Talent and luck are themselves unrelated.",
+  "nodes": ["Talent", "Luck", "Fame"],
+  "edges": [
+    ["Talent", "Fame"],
+    ["Luck", "Fame"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Talent and Luck are independent causes of Fame",
+      "Fame is a collider — it is influenced by two unrelated factors",
+      "Talent does not cause Luck, and Luck does not cause Talent",
+      "Among famous people, you may observe a negative correlation between talent and luck (collider bias), but this is not a causal relationship"
+    ],
+    "counterfactual": {
+      "intervention": "A person becomes more talented",
+      "expected_outcome": "Fame becomes more likely. Luck is unaffected because there is no causal arrow from Talent to Luck."
+    },
+    "flaws": []
+  }
+}

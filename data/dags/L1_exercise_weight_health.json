@@ -1,0 +1,27 @@
+{
+  "id": "L1_exercise_weight_health",
+  "level": 1,
+  "pattern": "mediation",
+  "pattern_description": "MEDIATION (A → M → B): A causes B entirely through a mediator M. There is no direct path from A to B. Tests whether the LLM understands indirect effects and can identify the mediating mechanism rather than treating A and B as directly linked.",
+  "difficulty_notes": "Easy. 3 nodes, 2 edges. Similar in structure to a chain but framed around a mechanism question — useful for testing whether the LLM can articulate the *why* behind an indirect effect.",
+  "domain": "health",
+  "description": "Exercise improves overall health by reducing body weight. The effect is fully mediated through weight.",
+  "nodes": ["Exercise", "Body Weight", "Health"],
+  "edges": [
+    ["Exercise", "Body Weight"],
+    ["Body Weight", "Health"]
+  ],
+  "ground_truth": {
+    "explanation_points": [
+      "Exercise affects health only indirectly, through its effect on body weight",
+      "Body Weight is the mediator in this relationship",
+      "There is no direct arrow from Exercise to Health in this model",
+      "If body weight did not change, exercise would have no effect on health in this model"
+    ],
+    "counterfactual": {
+      "intervention": "A person starts exercising regularly",
+      "expected_outcome": "Body weight decreases, and as a result, health improves. The effect on health is indirect, flowing through body weight."
+    },
+    "flaws": []
+  }
+}
