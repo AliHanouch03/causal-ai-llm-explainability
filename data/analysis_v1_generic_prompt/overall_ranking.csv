@@ -1,0 +1,7 @@
+llm,mean_score,std_dev,n_data_points
+qwen3-32b,4.681,0.575,144
+gemini-3-flash-preview,4.312,1.243,144
+magistral-medium,3.861,1.545,144
+gemini-2.5-flash,3.778,1.67,144
+llama-3.3-70b,3.625,1.621,144
+c4ai-aya-expanse-32b,3.312,1.571,144

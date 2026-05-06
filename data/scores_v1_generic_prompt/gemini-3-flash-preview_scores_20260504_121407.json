@@ -1,0 +1,415 @@
+{
+  "llm": "gemini-3-flash-preview",
+  "judge": "nemotron-3-super",
+  "timestamp": "20260504_121407",
+  "scores": [
+    {
+      "dag_id": "L1_exercise_weight_health",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies the nodes and edges in the DAG and correctly recognizes the mediation pattern. It also covers most of the expected explanation points, clearly explaining the relationships between exercise, body weight, and health. However, it does not explicitly state that there is no direct arrow from Exercise to Health, which is a minor gap in completeness.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L1_icecream_drowning",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies the nodes and edges from the DAG, correctly recognizes the fork pattern, and covers most of the expected explanation points. The language is clear and accessible, and the response avoids inventing relationships not in the DAG. However, it does not explicitly state that banning ice cream would not reduce drownings as an expected outcome of an intervention, which is a minor gap in completeness.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies the nodes and edges in the DAG, correctly recognizes the chain pattern, and provides a clear and faithful explanation of the relationships. However, it falls short on completeness as it does not explicitly address the counterfactual scenario or directly state that smoking affects death only indirectly through cancer, although it implies these points. The language is clear and accessible to a non-expert.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L1_talent_luck_fame",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies the nodes and edges in the DAG, correctly recognizes the collider pattern, and provides a clear explanation of the relationships between talent, luck, and fame. However, it does not fully cover all expected explanation points, such as the potential for observing a negative correlation between talent and luck due to collider bias. The language is clear and accessible, and the response avoids inventing relationships not present in the DAG.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_climate_crops",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG, recognizes the parallel mediation pattern, and provides a clear explanation of the relationships. However, it does not explicitly state that there is no direct edge from Climate Change to Crop Yield, which is a key point from the ground truth. Overall, the response is well-structured, easy to follow, and faithful to the original DAG.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 2,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 2
+      },
+      "justification": "The response is clear and accessible, but it incorrectly identifies the relationships between nodes, such as suggesting a direct edge from Education to Health, which is not present in the DAG. It also fails to recognize the correct causal pattern, including Family Background as a confounder and Income as a mediator. The response invents relationships not in the DAG, such as the direct effect of Education on Health.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_marketing_sales",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies all nodes and edges from the DAG, correctly recognizes the multi-path causal pattern, and covers most of the expected explanation points. The language used is clear and accessible, and it avoids inventing relationships not in the DAG. However, it does not fully address the counterfactual scenario, resulting in a minor deduction for completeness.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_study_grades_scholarship",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies all nodes and edges, and clearly explains the relationships between them. However, it only partially recognizes the causal pattern, missing the explicit identification of Intelligence as a confounder and Scholarship as a collider. The response is also incomplete, lacking some of the expected explanation points from the ground truth, but its language is clear and accessible, and it avoids inventing relationships not in the DAG.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L3_asia_broken_missing",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 4,
+        "pattern_recognition": 3,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately describes the nodes and edges in the DAG, and clearly explains the relationships between them. It also recognizes the omission of a confounder, air pollution, which affects the accuracy of the causal estimates. However, it does not fully articulate the causal pattern or explicitly state the flaws in the graph, which prevents it from receiving perfect scores for structural accuracy and pattern recognition.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L3_asia_broken_reversed",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 4,
+        "pattern_recognition": 3,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The LLM's response accurately identifies the nodes and edges in the DAG, but partially recognizes the causal pattern. The response clearly explains the connections between variables and avoids inventing relationships not in the DAG, but misses some expected explanation points from the ground truth. Overall, the language is clear and accessible to a non-expert.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L3_asia_broken_spurious",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 2,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 2
+      },
+      "justification": "The response provides a clear and accessible explanation of the diagnostic model, but it fails to accurately identify the spurious edge and does not fully address the expected explanation points from the ground truth. The language is clear, but the response lacks depth in terms of structural accuracy, pattern recognition, and completeness, and also invents relationships not explicitly stated in the DAG.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 4,
+        "pattern_recognition": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately identifies most nodes and edges, recognizes the complex multi-path pattern with a collider, and uses clear language. However, it lacks completeness in covering all expected explanation points, such as the indirect effect of smoking on dyspnea and the specific effect of tuberculosis on X-ray results and dyspnea through the 'TB or Cancer' node. The response remains faithful to the original DAG, avoiding invented relationships.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L1_exercise_weight_health",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that increasing Exercise leads to a decrease in Body Weight, which then improves Health, matching the expected directional effects. It accurately identifies which variables are affected (Body Weight and Health) and explains why no other variables are changed, noting that influence flows only downstream. The mechanism is explained as a domino effect along the directed arrows, and the counterfactual reasoning aligns with the model: the effect on Health is mediated entirely through Body Weight.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_icecream_drowning",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that banning ice cream sales reduces ice cream sales to zero while leaving hot weather and drownings unchanged. It accurately identifies which variables are affected and explains that the effect does not propagate because ice cream sales is a sink node and the shared cause (hot weather) remains intact, matching counterfactual expectations.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM response accurately describes the direction of change for each variable, correctly identifies which variables are affected and which are not, explains the propagation mechanism using clear analogies, and aligns with the expected counterfactual logic of an indirect effect via the mediator.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_talent_luck_fame",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that increasing Talent raises Fame while leaving Luck unchanged, matching the expected direction of effects. It accurately identifies Fame as the only affected variable and explains the causal pathway via the Talent \u2192 Fame arrow, with no further propagation. The reasoning aligns precisely with counterfactual logic for this collider structure.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_climate_crops",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts that halting climate change stabilizes temperature, rainfall, soil quality, and consequently crop yield, which matches the expected direction of change. It accurately identifies all downstream variables as affected and none as unaffected, and explains the causal propagation through the graph in two clear stages. Its reasoning aligns with counterfactual logic of intervening at the root cause and observing the mediated effects on the outcome.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts the direction of change for all variables (Education \u2191, Income \u2191, Health \u2191, Family Background unchanged) and correctly identifies which variables are affected versus unaffected. It explains the causal chain (Education \u2192 Income \u2192 Health) and notes that Family Background remains unchanged, though it does not explicitly mention the absence of a direct Education\u2192Health edge or the confounding bias nuance, leading to a slightly lower mechanism score.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_marketing_sales",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that Brand Awareness and Sales increase while Seasonality remains unchanged, accurately describes the direct and indirect pathways of effect, and applies proper counterfactual reasoning by treating Marketing Spend as an intervention and noting that unchanged causal mechanisms (e.g., Awareness\u2192Sales) persist.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_study_grades_scholarship",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts that doubling study hours increases grades and scholarship chances while leaving intelligence and athletic ability unchanged. It accurately identifies which variables are affected/unaffected and explains the forward propagation of the effect after breaking the incoming edge to the intervened variable, matching counterfactual logic.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly identifies that quitting smoking decreases Lung Cancer and Bronchitis, which reduces TB or Cancer, Dyspnoea, and X-Ray Result, while leaving Visit to Asia and Tuberculosis unchanged. It explains the downstream propagation of effects, notes the absence of backward influence, and aligns with the collider structure of TB or Cancer, matching the expected counterfactual logic.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_exercise_weight_health",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed the DAG had multiple flaws (missing direct effect, omitted confounders, bi-directionality) when the ground truth states the DAG is correct with no flaws. This results in poor flaw detection and classification and a failure to avoid false positives. Although the response provided detailed reasoning, the reasoning is based on false premises, lowering explanation quality.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_icecream_drowning",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM incorrectly claimed the DAG had flaws (missing mediators, confounders, temporal granularity) when the ground truth specifies no flaws, resulting in poor flaw detection, classification, and false\u2011positive avoidance. However, its justification for each claim was thorough, domain\u2011knowledgeable, and logically sound, earning full credit for explanation quality.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The response accurately identifies the flaws in the provided DAG, including the missing direct edge from Smoking to Death, and correctly classifies them as missing edges. The explanation is of high quality, providing sound reasoning and examples to justify the assessment. The response also avoids inventing flaws, demonstrating a thorough understanding of the causal relationships represented in the DAG.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L1_talent_luck_fame",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The response accurately identified the flaws in the DAG, including the omission of important variables such as socioeconomic status and effort, and correctly classified these as missing variables. The response also demonstrated sound reasoning and provided a clear explanation of the potential issues with the graph, including the risk of selection bias and spurious correlations. The critique was thorough and well-justified, earning high scores across all metrics.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_climate_crops",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM's response correctly identifies several flaws in the provided DAG, including missing variables and edges, and provides a clear explanation of the issues and suggested revisions. The response demonstrates a strong understanding of causal reasoning and the domain-specific context of climate change and agriculture. The LLM's evaluation is thorough and well-justified, earning high scores across all metrics.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 4,
+        "flaw_classification": 4,
+        "false_positive_avoidance": 3,
+        "explanation_quality": 5
+      },
+      "justification": "The response demonstrates a strong understanding of causal reasoning and identifies several potential flaws in the graph, including missing variables and reciprocal relationships. However, it also introduces some unnecessary complexity and inventions, such as the 'Great Confounder' of genetics, which are not directly relevant to the original graph. The explanation quality is high, with sound reasoning and domain knowledge, but the response could be more focused on the specific flaws in the original graph.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_marketing_sales",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM's response accurately identifies several critical flaws in the provided causal graph, including missing edges such as Seasonality \u2192 Marketing Spend and the omission of important variables like Price and Competitor Activity. The response also demonstrates a deep understanding of causal modeling concepts, such as simultaneity bias, omitted variable bias, and the importance of temporal dynamics. The explanation quality is high, with sound reasoning and relevant domain knowledge applied to justify the assessment.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L2_study_grades_scholarship",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The response accurately identifies potential flaws in the DAG, including omitted variable bias, collider bias, and issues with causal direction. It also provides sound reasoning and justification for its assessments, demonstrating a strong understanding of causal reasoning principles. The evaluation is thorough and well-supported, earning high scores across all metrics.",
+      "judge": "llama-3.3-70b"
+    },
+    {
+      "dag_id": "L3_asia_broken_missing",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 2,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 4
+      },
+      "justification": "The response identified that variables are missing but failed to specify the key missing confounder Air Pollution, so flaw detection and classification are only partially correct. It did not invent false flaws on this broken DAG, earning full credit for false positive avoidance. Its explanation provided detailed, sound reasoning about various limitations, justifying its overall critique well.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_reversed",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM correctly identified the reversed Lung Cancer \u2192 Smoking edge as the primary flaw and classified it as a reversed edge. It avoided inventing flaws on this broken DAG and provided thorough, domain\u2011based justification for its assessment.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_spurious",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM correctly identified the spurious edge Visit to Asia \u2192 Lung Cancer and explained why it is biologically unjustified. It also provided additional, relevant critiques without inventing flaws on a broken DAG, and its reasoning is thorough and sound.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed multiple flaws in a DAG that the ground truth deems flawless, resulting in false positives. Its flaw classifications are therefore unfounded, and while it offered reasoning, the reasoning rests on mistaken premises, weakening explanatory quality.",
+      "judge": "nemotron-3-super"
+    }
+  ]
+}

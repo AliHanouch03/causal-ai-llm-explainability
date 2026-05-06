@@ -1,0 +1,7 @@
+llm,L1,L2,L3,overall
+qwen3-32b,4.769,4.615,4.65,4.678
+gemini-3-flash-preview,4.404,4.577,3.85,4.277
+magistral-medium,4.212,3.5,3.875,3.862
+gemini-2.5-flash,3.808,3.538,4.05,3.799
+llama-3.3-70b,3.596,3.327,4.05,3.658
+c4ai-aya-expanse-32b,3.269,3.404,3.25,3.308

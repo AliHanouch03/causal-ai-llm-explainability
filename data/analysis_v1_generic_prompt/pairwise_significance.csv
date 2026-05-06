@@ -1,0 +1,16 @@
+llm_a,llm_b,mean_a,mean_b,winner,U_statistic,p_value,significant_p<0.05,significant_bonferroni
+c4ai-aya-expanse-32b,gemini-3-flash-preview,3.312,4.312,gemini-3-flash-preview,6603.5,0.0,True,True
+c4ai-aya-expanse-32b,qwen3-32b,3.312,4.681,qwen3-32b,5366.0,0.0,True,True
+llama-3.3-70b,qwen3-32b,3.625,4.681,qwen3-32b,7020.0,0.0,True,True
+magistral-medium,qwen3-32b,3.861,4.681,qwen3-32b,8011.0,7.8e-05,True,True
+gemini-3-flash-preview,llama-3.3-70b,4.312,3.625,gemini-3-flash-preview,12784.5,0.000107,True,True
+gemini-2.5-flash,qwen3-32b,3.778,4.681,qwen3-32b,8177.0,0.00021,True,True
+c4ai-aya-expanse-32b,magistral-medium,3.312,3.861,magistral-medium,8259.0,0.001461,True,True
+c4ai-aya-expanse-32b,gemini-2.5-flash,3.312,3.778,gemini-2.5-flash,8504.5,0.004709,True,False
+gemini-3-flash-preview,magistral-medium,4.312,3.861,gemini-3-flash-preview,11860.0,0.013618,True,False
+gemini-2.5-flash,gemini-3-flash-preview,3.778,4.312,gemini-3-flash-preview,8907.0,0.014737,True,False
+c4ai-aya-expanse-32b,llama-3.3-70b,3.312,3.625,llama-3.3-70b,9165.5,0.073399,False,False
+llama-3.3-70b,magistral-medium,3.625,3.861,magistral-medium,9482.0,0.169846,False,False
+gemini-3-flash-preview,qwen3-32b,4.312,4.681,qwen3-32b,9647.5,0.198791,False,False
+gemini-2.5-flash,llama-3.3-70b,3.778,3.625,gemini-2.5-flash,11120.0,0.240787,False,False
+gemini-2.5-flash,magistral-medium,3.778,3.861,magistral-medium,10285.0,0.895072,False,False

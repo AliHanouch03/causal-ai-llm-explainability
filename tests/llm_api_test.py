@@ -1,3 +1,5 @@
+"""test if llm is reachable and returns something"""
+
 from dotenv import load_dotenv
 load_dotenv()
 

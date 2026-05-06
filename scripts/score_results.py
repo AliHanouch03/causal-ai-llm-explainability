@@ -23,7 +23,7 @@ from llm_clients import get_client
 
 
 # Judge configuration
-JUDGE_MODEL = "llama-3.3-70b"
+JUDGE_MODEL = "nemotron-3-super"  # The main judge LLM to use for scoring responses
 SELF_JUDGE_FALLBACK = "gemini-2.5-flash"
 
 
@@ -128,11 +128,13 @@ def parse_judge_response(text):
 
     # Strip markdown code fences if present
     if text.startswith("```"):
-        # Remove opening fence (with or without language tag)
         text = re.sub(r"^```(?:json)?\s*", "", text)
-        # Remove closing fence
         text = re.sub(r"\s*```\s*$", "", text)
         text = text.strip()
+
+    # Strip any reasoning tags that survived
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    text = re.sub(r"<thinking>.*?</thinking>", "", text, flags=re.DOTALL).strip()
 
     # Try direct parse first
     try:
@@ -140,24 +142,52 @@ def parse_judge_response(text):
     except json.JSONDecodeError:
         pass
 
-    # Fallback: extract the first {...} block
+    # Fallback 1: extract the first {...} block (greedy)
     match = re.search(r"\{.*\}", text, re.DOTALL)
     if match:
-        return json.loads(match.group(0))
+        try:
+            return json.loads(match.group(0))
+        except json.JSONDecodeError:
+            pass
 
-    raise ValueError(f"Could not parse JSON from judge response: {text[:200]}")
+    # Fallback 2: find the LAST {...} block (in case there's a thinking JSON before the answer)
+    matches = list(re.finditer(r"\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", text, re.DOTALL))
+    for match in reversed(matches):
+        try:
+            parsed = json.loads(match.group(0))
+            if "scores" in parsed:
+                return parsed
+        except json.JSONDecodeError:
+            continue
+
+    # Fallback 3: look for a "scores": {...} substring directly
+    scores_match = re.search(r'"scores"\s*:\s*(\{[^{}]*\})', text, re.DOTALL)
+    if scores_match:
+        try:
+            scores_obj = json.loads(scores_match.group(1))
+            return {"scores": scores_obj, "justification": ""}
+        except json.JSONDecodeError:
+            pass
+
+    raise ValueError(f"Could not parse JSON from judge response: {text[:300]}")
 
 
 def already_scored(scores_path, llm_name, dag_id, task_type):
-    """Check if this response was already scored in a previous run."""
+    """
+    Check if this response was already successfully scored in a previous run.
+    Only counts entries with a non-empty scores dict.
+    """
     for filepath in scores_path.glob(f"{llm_name}_scores_*.json"):
         try:
             with open(filepath) as f:
                 data = json.load(f)
             for s in data.get("scores", []):
+                scores = s.get("scores")
                 if (s.get("dag_id") == dag_id
                     and s.get("task_type") == task_type
-                    and s.get("scores") is not None):
+                    and scores is not None
+                    and isinstance(scores, dict)
+                    and len(scores) > 0):
                     return s
         except Exception:
             continue
@@ -228,13 +258,9 @@ def score_results(results_dir="data/results", scores_dir="data/scores"):
     dags = load_all_dags()
     dag_by_id = {d["id"]: d for d in dags}
 
-    # Initialize both judges
-    print(f"Initializing primary judge: {JUDGE_MODEL}")
-    primary_judge = get_client(JUDGE_MODEL)
-
-    print(f"Initializing fallback judge: {SELF_JUDGE_FALLBACK}")
-    print(f"  (used when scoring {JUDGE_MODEL}'s own responses to avoid self-bias)")
-    fallback_judge = get_client(SELF_JUDGE_FALLBACK)
+    # Initialize the judge
+    print(f"Initializing judge: {JUDGE_MODEL}")
+    judge = get_client(JUDGE_MODEL)
 
     # Find latest result files
     latest_files = find_latest_results(results_path)
@@ -246,22 +272,14 @@ def score_results(results_dir="data/results", scores_dir="data/scores"):
     grand_total_failed = 0
 
     for llm_name, (filepath, _) in latest_files.items():
-        # Choose the right judge for this LLM
-        if llm_name == JUDGE_MODEL:
-            active_judge = fallback_judge
-            active_judge_name = SELF_JUDGE_FALLBACK
-        else:
-            active_judge = primary_judge
-            active_judge_name = JUDGE_MODEL
-
-        print(f"\n=== Scoring {llm_name} (judge: {active_judge_name}) ===")
+        print(f"\n=== Scoring {llm_name} (judge: {JUDGE_MODEL}) ===")
 
         with open(filepath) as f:
             llm_data = json.load(f)
 
         scored_results = {
             "llm": llm_name,
-            "judge": active_judge_name,
+            "judge": JUDGE_MODEL,
             "timestamp": timestamp,
             "scores": []
         }
@@ -281,7 +299,7 @@ def score_results(results_dir="data/results", scores_dir="data/scores"):
             dag = dag_by_id[dag_id]
             print(f"  [{task_type}] {dag_id}...", end=" ", flush=True)
 
-            # Resume support: skip if already scored
+            # Resume support: skip if already successfully scored
             existing = already_scored(scores_path, llm_name, dag_id, task_type)
             if existing:
                 scored_results["scores"].append(existing)
@@ -292,7 +310,7 @@ def score_results(results_dir="data/results", scores_dir="data/scores"):
 
             try:
                 prompt = build_judge_prompt(dag, task_type, response)
-                parsed = score_with_retry(active_judge, prompt)
+                parsed = score_with_retry(judge, prompt)
 
                 # Validate that all expected metrics are present
                 expected_metrics = set(METRICS[task_type])
@@ -315,7 +333,7 @@ def score_results(results_dir="data/results", scores_dir="data/scores"):
                     "task_type": task_type,
                     "scores": clean_scores,
                     "justification": parsed.get("justification", ""),
-                    "judge": active_judge_name,
+                    "judge": JUDGE_MODEL,
                 })
 
                 if clean_scores:
@@ -333,7 +351,7 @@ def score_results(results_dir="data/results", scores_dir="data/scores"):
                     "task_type": task_type,
                     "scores": None,
                     "error": str(e)[:200],
-                    "judge": active_judge_name,
+                    "judge": JUDGE_MODEL,
                 })
                 grand_total_failed += 1
 

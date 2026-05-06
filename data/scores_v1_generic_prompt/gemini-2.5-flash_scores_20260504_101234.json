@@ -1,0 +1,415 @@
+{
+  "llm": "gemini-2.5-flash",
+  "judge": "nemotron-3-super",
+  "timestamp": "20260504_101234",
+  "scores": [
+    {
+      "dag_id": "L1_exercise_weight_health",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately lists the three variables and the two directed edges while explicitly noting the absence of a direct Exercise\u2192Health link, correctly identifying the mediation pattern. It addresses all four ground\u2011truth explanation points, including the conditional effect of weight change, using plain language suitable for a non\u2011expert. No extra relationships or nodes are introduced, maintaining full faithfulness to the provided DAG.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_icecream_drowning",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges and recognizes the fork pattern. It covers most explanation points (common cause, correlation without causation, spuriousness) but omits the explicit intervention point about banning ice cream not affecting drownings. Language is clear and accessible, and no extra relationships are invented.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all three nodes and both edges, describes the causal chain pattern, covers the four explanation points (root cause, mediator, indirect effect, no direct arrow) in accessible language, and does not introduce any relationships not present in the DAG.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_talent_luck_fame",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges and avoids inventing extra relationships, earning full marks for structural accuracy and faithfulness. It describes the collider structure (two independent causes pointing to Fame with no link between them) but does not use the term 'collider' or mention collider bias, leading to a minor shortfall in pattern recognition. It covers the independence of Talent and Luck and their effects on Fame, but omits explicit discussion of collider bias and the counterfactual, affecting completeness. Language is clear and accessible throughout.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_climate_crops",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges, showing strong structural accuracy and faithfulness. It clearly explains the parallel mediator pattern in accessible language, earning high scores for pattern recognition and clarity. However, it omits explicit statements about the absence of a direct Climate Change \u2192 Crop Yield edge and the combined total effect, reducing completeness.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 3,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 1
+      },
+      "justification": "The response correctly identifies all four nodes and most edges but incorrectly adds a direct Education \u2192 Health edge, misrepresenting the DAG. It mentions the chain and family background influence but fails to recognize confounding, mediation, the fully mediated effect, and the bias from omitting Family Background. Language is clear and accessible, but the invented edge violates faithfulness.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_marketing_sales",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all variables and edges from the DAG and explains the dual pathways of marketing influence in clear, non\u2011technical language. However, it does not explicitly state that Brand Awareness is a partial mediator or that the total effect equals the sum of direct and indirect effects, leaving those points implicit.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_study_grades_scholarship",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly lists all nodes and edges from the DAG and accurately describes the fork (Intelligence as a common cause) and collider (Scholarship as a common effect). However, it omits discussion of the independence of Grades and Athletic Ability, collider bias, and the spurious association that arises when conditioning on Scholarship, which lowers completeness. The explanation is clear and accessible, and no incorrect relationships are introduced.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_missing",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 1,
+        "completeness": 1,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response accurately lists all nodes and edges present in the DAG without adding any false relationships, earning full marks for structural accuracy and faithfulness. However, it fails to identify the missing confounder pattern, mention Air Pollution, or discuss the bias introduced by its omission, resulting in low scores for pattern recognition and completeness. The explanation is clear and accessible to a non-expert audience.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_reversed",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The LLM correctly lists all nodes and edges, showing strong structural accuracy and faithfulness. However, it fails to identify the reversed Lung Cancer \u2192 Smoking edge as a flaw, missing the core explanation points and not discussing causal patterns, resulting in low completeness and pattern recognition scores. The explanation is clear and accessible.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_spurious",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly lists all nodes and edges from the DAG and avoids inventing relationships, showing strong structural accuracy and faithfulness. However, it fails to identify the spurious edge (Visit to Asia \u2192 Lung Cancer) or explain why it is incorrect, resulting in low pattern recognition and completeness regarding the expected explanation points. The explanation is clear and accessible to a non-expert audience.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly lists all nodes and edges, showing full structural accuracy and faithfulness. It describes the collider structure implicitly but does not explicitly label TB or Cancer as a collider, and omits explicit statements about the lack of a direct Smoking\u2192Dyspnoea edge and the exclusivity of X-Ray Result determination, reducing completeness. The explanation is clear and accessible to a non-expert.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_exercise_weight_health",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 3
+      },
+      "justification": "The response correctly predicts the direction of change for each variable and accurately notes that all three variables in the DAG are affected. It explains the causal chain but omits explicit emphasis on the indirect-only nature of the effect and the absence of a direct Exercise\u2192Health arrow, weakening the mechanism and counterfactual reasoning.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_icecream_drowning",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly states that banning ice cream would drive ice cream sales to zero while leaving hot weather and drownings unchanged, explains how the fork structure prevents any effect on drownings, and matches the expected counterfactual outcome that drowning rates would not change.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly states that stopping smoking reduces cancer risk, which in turn reduces death risk, aligning with the expected direction of effects. It accurately identifies which variables are affected (smoking, cancer, death) and which are not (the cancer\u2192death link and other causes), explains the propagation of the effect through the chain, and applies proper counterfactual reasoning.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_talent_luck_fame",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that increasing Talent raises Fame while Luck remains unchanged, accurately identifies which variables are affected, explains the causal pathway via the Talent \u2192 Fame arrow, and its reasoning matches the expected counterfactual logic.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_climate_crops",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts that halting climate change stabilizes or improves temperature, rainfall, soil quality, and consequently crop yield, matching the expected direction of change. It correctly identifies that all variables in the graph are affected and none are unaffected. The explanation traces the causal chain from the intervention through the mediators to the outcome, aligning with the counterfactual logic of removing the source of influence.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 3
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and correctly identifies which are affected. It explains the causal chain via income but omits explicit discussion of full mediation, confounding, and bias, which are key to the expected counterfactual reasoning.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_marketing_sales",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables, accurately identifies which are affected and which are not, explains the dual-path mechanism of effect propagation, and applies sound counterfactual reasoning consistent with the DAG.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_study_grades_scholarship",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts that doubling study hours increases grades and scholarship chances while leaving intelligence and athletic ability unchanged, matching the expected directions. It accurately identifies which variables are affected and explains the causal pathways through the graph, demonstrating sound counterfactual reasoning.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly identifies all variables affected by quitting smoking and their direction of change, correctly notes which variables remain unaffected, explains the causal pathways through the DAG, and its reasoning aligns with the expected counterfactual logic.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_exercise_weight_health",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that is correct for the specified mediation pattern, showing poor flaw detection and classification. It invented false positives, failing to avoid them. However, its explanations were well-reasoned, citing domain knowledge and causal principles, demonstrating high explanation quality despite the mistaken conclusion.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_icecream_drowning",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified a missing mediator as a flaw, failing to recognize that the given DAG is correct. Consequently, flaw detection and classification are poor, and it produced a false positive. Although it offered detailed reasoning, the justification for the claimed flaw is unsound relative to the task, resulting in low explanation quality.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that the ground truth defines as flawless, resulting in poor flaw detection, classification, and false positive avoidance. However, its explanations were well\u2011reasoned and grounded in epidemiological knowledge, showing strong explanatory quality despite being misapplied.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L1_talent_luck_fame",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that is correct for the given collider structure, failing to detect that there are no flaws. Its flaw classification and false positive avoidance are therefore wrong. While it provided detailed reasoning, the reasoning is based on a mistaken premise, so explanation quality is only slightly better than completely wrong.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_climate_crops",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that the ground truth deems flawless, resulting in poor scores for flaw detection, classification, and false positive avoidance. However, its critique provided detailed, domain\u2011sound reasoning for each claimed issue, demonstrating high explanation quality despite the erroneous conclusion.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that is correct according to the ground truth, showing poor flaw detection and classification. While it invented flaws, its reasoning about the plausibility of existing edges was sound, providing some explanatory quality.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_marketing_sales",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that the ground truth deems flawless, resulting in poor flaw detection and classification. It also invented flaws, failing false positive avoidance. While its explanation is detailed, it rests on mistaken premises, making the justification only partially sound.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L2_study_grades_scholarship",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly claimed the DAG has flaws (missing confounders), when the ground truth indicates no flaws. Its flaw detection and classification are therefore wrong, and it invented false positives. However, it provided detailed, sound reasoning to support its assessment, justifying the explanation quality score.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_missing",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM correctly identified the missing confounder (Air Pollution) and other omitted variables, properly classified the flaw as missing, and provided thorough, sound reasoning for its assessment. Since the DAG is broken, false positive avoidance is not applicable and receives full credit.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_reversed",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM correctly identified the reversed causal edge (Lung Cancer \u2192 Smoking) and explained why it is implausible, providing sound domain\u2011based reasoning for all other edges. Since the DAG is known to be broken, false\u2011positive avoidance is not applicable and receives full credit.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_broken_spurious",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM correctly identified the spurious edge Visit to Asia \u2192 Lung Cancer, classified it as spurious, and provided a detailed, domain\u2011based justification. No incorrect flaws were introduced, and the explanation aligns with the ground truth.",
+      "judge": "nemotron-3-super"
+    },
+    {
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The DAG is correct per the ground truth (no flaws), but the LLM incorrectly identified multiple flaws, misclassifying logical edges as spurious and inventing missing confounders. Consequently, it failed flaw detection and classification and produced false positives. Its explanation, while detailed, is based on mistaken premises.",
+      "judge": "nemotron-3-super"
+    }
+  ]
+}
