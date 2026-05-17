@@ -1,0 +1,7 @@
+llm,counterfactual,critique,explanation,overall
+gemini-3-flash-preview,4.917,2.062,4.5,3.826
+gemini-2.5-flash,4.972,2.104,4.3,3.792
+magistral-medium,4.917,2.104,4.2,3.74
+qwen3-32b,4.528,2.062,4.267,3.619
+llama-3.3-70b,4.722,2.0,4.05,3.591
+c4ai-aya-expanse-32b,3.917,1.729,3.667,3.104

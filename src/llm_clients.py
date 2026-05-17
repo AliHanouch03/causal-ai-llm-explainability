@@ -6,6 +6,7 @@ from groq import Groq
 from mistralai.client import Mistral
 import cohere
 from openai import OpenAI
+from itertools import cycle
 
 
 class NvidiaClient:
@@ -31,21 +32,32 @@ class NvidiaClient:
         text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
         return text
 
+# Build a list of available Gemini keys, filtering out missing ones
+_GEMINI_KEYS = [
+    os.getenv("GEMINI_API_KEY"),
+    os.getenv("GEMINI_API_KEY_2"),
+    os.getenv("GEMINI_API_KEY_3"),
+]
+_GEMINI_KEYS = [k for k in _GEMINI_KEYS if k]
+_GEMINI_KEY_CYCLE = cycle(_GEMINI_KEYS) if _GEMINI_KEYS else None
+
+
 class GeminiClient:
     def __init__(self, model_name="gemini-2.0-flash"):
-        api_key = os.getenv("GEMINI_API_KEY")
-        if not api_key:
-            raise ValueError("GEMINI_API_KEY not set in environment")
-        self.client = genai.Client(api_key=api_key)
+        if not _GEMINI_KEYS:
+            raise ValueError("No Gemini API keys set in environment")
         self.model_name = model_name
 
     def generate(self, prompt):
-        response = self.client.models.generate_content(
+        # Rotate to next key on every call to spread load across accounts
+        api_key = next(_GEMINI_KEY_CYCLE)
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(
             model=self.model_name,
             contents=prompt
         )
-        # Stay under the free tier 5 RPM limit
-        time.sleep(13)
+        # Slightly relaxed sleep since we have 3 times the quota
+        time.sleep(5)
         return response.text
 
 

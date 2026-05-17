@@ -195,11 +195,16 @@ def already_scored(scores_path, llm_name, dag_id, task_type):
 
 
 def score_with_retry(judge, prompt, max_retries=4):
-    """Run a judge call with retry on rate limits or parsing failures."""
+    """
+    Run a judge call with retry on rate limits, timeouts, and parse failures.
+    On parse failure, escalates the prompt to demand stricter JSON output.
+    """
     last_error = None
+    current_prompt = prompt
+    
     for attempt in range(max_retries):
         try:
-            judge_response = judge.generate(prompt)
+            judge_response = judge.generate(current_prompt)
             return parse_judge_response(judge_response)
         except Exception as e:
             last_error = e
@@ -217,21 +222,57 @@ def score_with_retry(judge, prompt, max_retries=4):
             if is_rate_limit:
                 retry_match = re.search(r"retry in (\d+(?:\.\d+)?)s", error_str)
                 wait_time = float(retry_match.group(1)) + 3 if retry_match else 30
-                print(f"⏸  rate limited, waiting {wait_time:.0f}s ", end="", flush=True)
+                print(f"⏸ rate limited, waiting {wait_time:.0f}s ", end="", flush=True)
                 time.sleep(wait_time)
                 continue
             elif is_timeout:
-                print(f"⏸  timeout, waiting 10s ", end="", flush=True)
+                print(f"⏸ timeout, waiting 10s ", end="", flush=True)
                 time.sleep(10)
                 continue
             elif is_parse_error:
-                # Sometimes the model returns malformed JSON, just retry
-                print(f"⏸  parse error, retrying ", end="", flush=True)
+                print(f"⏸ parse error, escalating prompt ", end="", flush=True)
+                # Escalate prompt strictness on each retry
+                current_prompt = escalate_prompt(prompt, attempt)
                 time.sleep(2)
                 continue
             else:
                 raise
     raise RuntimeError(f"Failed after {max_retries} retries: {last_error}")
+
+
+def escalate_prompt(original_prompt, attempt):
+    """
+    Rewrite the prompt to be progressively stricter about JSON-only output.
+    Used when the judge produces thinking-text instead of valid JSON.
+    """
+    if attempt == 0:
+        # First retry: prepend a strong format reminder
+        prefix = (
+            "CRITICAL: You must respond with ONLY a valid JSON object. "
+            "Do not include any thinking, reasoning, or explanation outside the JSON. "
+            "Do not narrate your evaluation. Output the JSON object directly.\n\n"
+        )
+        return prefix + original_prompt
+    
+    elif attempt == 1:
+        # Second retry: even stricter, with example
+        prefix = (
+            "OUTPUT FORMAT REQUIREMENT: Your entire response must be a single JSON object "
+            "starting with { and ending with }. No text before, no text after. "
+            "No <think> tags. No reasoning narration. Just the JSON.\n\n"
+            "Example of correct format:\n"
+            '{"scores": {"metric_a": 5, "metric_b": 4}, "justification": "brief reason"}\n\n'
+            "Now evaluate the following:\n\n"
+        )
+        return prefix + original_prompt
+    
+    else:
+        # Final retry: minimal prompt asking only for scores, no justification
+        # This is a fallback that drops the justification field to reduce length
+        prefix = (
+            "Output ONLY this JSON, with integer scores 1-5. No other text whatsoever:\n\n"
+        )
+        return prefix + original_prompt
 
 
 def find_latest_results(results_path):

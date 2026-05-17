@@ -1,4 +1,4 @@
-# Quick test script — save as scripts/test_nvidia_judge.py
+# Quick test script: checks the availability of the NVIDIA Judge LLM and its ability to generate a response
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))

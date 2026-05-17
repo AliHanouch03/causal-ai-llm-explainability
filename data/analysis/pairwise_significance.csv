@@ -1,0 +1,16 @@
+llm_a,llm_b,mean_a,mean_b,winner,U_statistic,p_value,significant_p<0.05,significant_bonferroni
+c4ai-aya-expanse-32b,gemini-3-flash-preview,3.083,3.792,gemini-3-flash-preview,7972.0,0.000312,True,True
+c4ai-aya-expanse-32b,gemini-2.5-flash,3.083,3.736,gemini-2.5-flash,8106.5,0.000665,True,True
+c4ai-aya-expanse-32b,magistral-medium,3.083,3.681,magistral-medium,8265.5,0.001686,True,True
+c4ai-aya-expanse-32b,qwen3-32b,3.083,3.597,qwen3-32b,8629.0,0.009288,True,False
+c4ai-aya-expanse-32b,llama-3.3-70b,3.083,3.535,llama-3.3-70b,8799.0,0.019608,True,False
+gemini-3-flash-preview,llama-3.3-70b,3.792,3.535,gemini-3-flash-preview,11134.0,0.231818,False,False
+gemini-2.5-flash,llama-3.3-70b,3.736,3.535,gemini-2.5-flash,11044.5,0.290953,False,False
+gemini-3-flash-preview,qwen3-32b,3.792,3.597,gemini-3-flash-preview,10898.0,0.403077,False,False
+llama-3.3-70b,magistral-medium,3.535,3.681,magistral-medium,9906.0,0.476036,False,False
+gemini-2.5-flash,qwen3-32b,3.736,3.597,gemini-2.5-flash,10816.5,0.479245,False,False
+gemini-3-flash-preview,magistral-medium,3.792,3.681,gemini-3-flash-preview,10723.5,0.575822,False,False
+gemini-2.5-flash,magistral-medium,3.736,3.681,gemini-2.5-flash,10622.0,0.689406,False,False
+magistral-medium,qwen3-32b,3.681,3.597,magistral-medium,10592.5,0.726901,False,False
+llama-3.3-70b,qwen3-32b,3.535,3.597,qwen3-32b,10169.5,0.759401,False,False
+gemini-2.5-flash,gemini-3-flash-preview,3.736,3.792,gemini-3-flash-preview,10282.5,0.891939,False,False

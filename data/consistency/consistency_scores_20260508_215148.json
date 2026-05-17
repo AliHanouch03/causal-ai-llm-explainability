@@ -1,0 +1,2170 @@
+{
+  "timestamp": "20260508_215148",
+  "judge": "nemotron-3-super",
+  "source_file": "consistency_trials_20260508_210932.json",
+  "config": {
+    "dags": [
+      "L1_smoking_cancer",
+      "L2_education_income_health",
+      "L3_asia_correct"
+    ],
+    "llms": [
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash",
+      "llama-3.3-70b",
+      "qwen3-32b",
+      "magistral-medium",
+      "c4ai-aya-expanse-32b"
+    ],
+    "tasks": [
+      "explanation",
+      "counterfactual",
+      "critique"
+    ],
+    "n_trials": 3
+  },
+  "scored_trials": [
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the three nodes and two directed edges, recognizes the chain/mediation pattern, covers all four ground\u2011truth explanation points, uses clear accessible language, and adds no unsupported relationships."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all three nodes and the two edges of the DAG, and accurately describes the causal chain pattern. It covers most explanation points (smoking as root cause, cancer as mediator, indirect effect) but does not explicitly state that there is no direct arrow from smoking to death, which is a minor omission. Language is clear and accessible, and no extra relationships are introduced."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 4,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes Smoking, Cancer, Death and the edges Smoking\u2192Cancer and Cancer\u2192Death, recognizing the chain pattern. It covers three of the four expected explanation points explicitly and implies the fourth (no direct arrow) without stating it outright. Language is clear aside from a minor typo, and no extra relationships are invented."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that stopping smoking reduces cancer and then death risk, identifying the correct direction of change. It accurately specifies which variables are affected (downstream) and which are not (upstream or external factors), and explains the mediating role of cancer. The reasoning aligns with the counterfactual expectation of an indirect effect mediated through cancer."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that stopping smoking reduces cancer and death risks, accurately identifies which variables are affected (downstream) and which are not (upstream and unrelated), explains the step\u2011by\u2011step propagation of the effect through the chain, and aligns with the counterfactual logic that the effect on death is indirect via cancer."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that stopping smoking reduces cancer risk, which in turn reduces death risk, reflecting the proper direction of change. It accurately identifies which variables are affected (smoking, cancer, death) and which remain unchanged (the causal links and upstream factors), and it explains the propagation of the effect through the chain. Overall, the reasoning aligns with the expected counterfactual logic and the ground\u2011truth explanation."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly claimed the DAG had missing influences, failing to detect that the given chain is intentionally simplified and contains no flaws. Consequently, its flaw detection, classification, and false\u2011positive avoidance are all wrong. However, it provided detailed, logical reasoning to support its critique, so the explanation quality is relatively strong."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct causal chain, asserting missing pathways and variables that do not constitute errors in the DAG itself. Consequently, flaw detection, classification, and false positive avoidance are all poor. Its explanation, while noting valid real\u2011world complexities, misapplies them as flaws, yielding only partial justification quality."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly flagged the correct DAG as flawed, missing the point that the simplified chain is intentionally minimal and not erroneous. Its critique introduces real\u2011world omissions as flaws, resulting in false positives. Nevertheless, it supplies detailed, logical reasoning to support its assessment."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG and accurately describes the mediating role of Income and the confounding influence of Family Background. However, it omits explicit discussion of bias from omitting Family Background, does not clearly state that there is no direct Education\u2192Health edge, and only implies the total effect is fully mediated. The language is clear and accessible, and no false causal relationships are introduced."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all four nodes and the exact edges of the DAG, with no extra or missing relationships. It accurately describes the confounder (Family Background) and mediator (Income) roles and notes the absence of a direct Education\u2192Health edge, but it omits the specific point about bias upward when Family Background is not controlled for, affecting pattern recognition and completeness. The language is clear, accessible, and faithful to the given causal structure."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly maps all nodes and edges and adds no false relationships, earning full marks for structural accuracy and faithfulness. It captures the confounder and mediator roles but misses explicit discussion of bias from uncontrolled confounding, the total effect flowing solely through income, and the absence of a direct Education\u2192Health edge, lowering pattern recognition and completeness. The explanation is written in clear, accessible language."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts that education, income, and health increase while family background remains unchanged, accurately describes the mediating role of income and the indirect effect on health, and maintains proper counterfactual reasoning about the intervention's effects and the persistent influence of family background."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that education, income, and health increase while family background remains unchanged, and it accurately describes the mediating pathway through income. It also acknowledges the direct effect of family background on health, showing full understanding of the DAG's structure and counterfactual logic."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables (education up, income up, health up, family background unchanged). It accurately identifies which variables are affected and which remain constant, and it explains the causal pathway through income as the mediator, matching the expected counterfactual logic."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that is intentionally correct per the ground truth, showing a failure to detect that there are no flaws and thus misclassifying non\u2011existent issues. While its explanations for each claimed flaw are well\u2011reasoned and cite relevant literature, they are based on mistaken premises about the model's structure, lowering the quality of its flaw\u2011related judgments."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a correct DAG, showing poor flaw detection and classification, and invented false positives. However, it provided detailed, socially plausible reasoning for each claimed flaw, demonstrating strong explanatory quality despite being misapplied."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM claimed multiple flaws in a DAG that is defined as correct for the task, thus failing flaw detection and classification and inventing false positives. Its explanation, though detailed, critiques omissions that are not considered flaws in the given model, making the justification unsound relative to the task."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": null,
+      "error": "Failed after 4 retries: Could not parse JSON from judge response: We need to evaluate the LLM's response against the ground truth.\n\nFirst, let's parse the DAG:\n\nNodes:\n- Visit to Asia\n- Tuberculosis\n-"
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": null,
+      "error": "Failed after 4 retries: Could not parse JSON from judge response: We need to evaluate the LLM response against ground truth.\n\nFirst, restate ground truth explanation points:\n\n1. Smoking is a root caus"
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": null,
+      "error": "Failed after 4 retries: Could not parse JSON from judge response: We need to evaluate the LLM's response against ground truth.\n\nFirst, list ground truth explanation points:\n\n1. Smoking is a root cause"
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected/unaffected. It explains the propagation pathways well, though it omits explicit mention of the TB or Cancer node as a collider receiving from both Tuberculosis and Lung Cancer. The causal reasoning aligns with the expected counterfactual logic of smoking cessation."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM's response correctly identifies all variables affected by quitting smoking, describes the proper direction of change for each, explains the mechanistic pathways through the graph, and aligns exactly with the expected counterfactual outcome."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM response accurately predicts the direction of change for each variable, correctly identifies which variables are affected or unaffected, explains the causal pathways through the DAG, and aligns precisely with the expected counterfactual outcome."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly treated omitted variables (age, occupational history, etc.) as flaws in the DAG, despite the DAG being correct as specified. Consequently it failed to detect the absence of flaws and invented false positives, though it offered detailed reasoning for its claims."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly asserted that the DAG has flaws by pointing out missing variables (age, occupational exposure, etc.), when the given DAG is intentionally simplified and contains no errors. Consequently, its flaw detection and classification are wrong, and it failed to avoid false positives. While it provided detailed reasoning, the reasoning is based on a mistaken premise, limiting the explanation's quality."
+    },
+    {
+      "llm": "gemini-3-flash-preview",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly claimed the DAG had flaws by pointing out missing variables, when the ground truth specifies no flaws. Consequently it failed to detect the absence of flaws and did not correctly classify any flaw type. While its explanation is detailed and medically plausible, it is largely off\u2011target, warranting only partial credit for explanation quality."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges (Smoking\u2192Cancer, Cancer\u2192Death) and recognizes the chain/mediation pattern. It clearly conveys the ideas without adding false relationships. However, it omits explicit statements about the indirect-only effect of smoking on death, the absence of a direct smoking\u2192death arrow, and the counterfactual intervention, reducing completeness."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges and recognizes the chain pattern. It clearly explains the indirect influence of smoking on death via cancer, but omits explicit statements about smoking being the root cause, the absence of a direct arrow, and the counterfactual intervention scenario, affecting completeness. Language is clear and no extra relationships are invented."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the three nodes and the two directed edges, and accurately describes the causal chain pattern. It conveys the root cause, mediator, and indirect effect concepts, but does not explicitly state that there is no direct arrow from smoking to death or use the term 'mediator', causing a minor completeness gap. Language is clear and accessible, and no extra relationships are invented."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that stopping smoking decreases cancer risk and thereby decreases death risk, identifying the proper direction of change for each variable. It accurately limits the affected variables to smoking, cancer, and death, explains the mediating role of cancer, and aligns with the expected counterfactual logic of an indirect effect."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts that stopping smoking reduces smoking, cancer, and death, with the effect on death mediated through cancer. It accurately identifies which variables are affected and explains the causal propagation through the chain. The reasoning aligns with the expected counterfactual outcome."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for smoking, cancer, and death and accurately identifies which variables are affected. It explains the causal propagation through the chain, though it does not explicitly state that there is no direct arrow from smoking to death. The counterfactual reasoning matches the expected outcome of reduced cancer and death risk after smoking cessation."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly claims a missing direct Smoking\u2192Death link, treating the simple chain as flawed when it is intentionally minimal. This misidentifies a flaw that does not exist, resulting in poor flaw detection, classification, and false\u2011positive avoidance. However, its explanation is detailed and logically reasoned, showing strong explanatory skill despite the mistaken premise."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct DAG, failing to recognize that there are none, misclassified flaw types, and invented false positives. While it correctly affirmed the supported links, its justification unjustifiably treated omitted variables as flaws, weakening its explanation."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified a flaw in the correct DAG, claiming a missing direct Smoking\u2192Death link and other omitted factors. While it correctly noted the direction of the existing arrows, its overall assessment misinterpreted the purpose of the simplified chain, leading to wrong flaw detection and classification. The explanation, though detailed, is based on an erroneous premise and thus lacks sound justification for the task."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG and accurately describes the confounder (Family Background) and mediator (Income) roles, showing strong structural accuracy and pattern recognition. However, it omits explicit discussion of bias from omitting Family Background and does not clearly state that there is no direct Education\u2192Health edge, reducing completeness. The language is clear and accessible, and no spurious relationships are introduced."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly lists all nodes and edges from the DAG without inventing any extra relationships, giving full structural accuracy and faithfulness. It accurately describes the causal chains but does not explicitly label Family Background as a confounder, Income as a mediator, note the absence of a direct Education\u2192Health edge, or mention bias from omitting Family Background, resulting in only partial pattern recognition and low completeness. The language is clear, well-organized, and accessible to a non-expert."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly captures all nodes and edges, accurately describes the confounder and mediation patterns, and remains clear and faithful to the DAG. However, it does not explicitly mention that failing to control for Family Background would bias the Education-Health effect, which omits one key explanation point."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unchanged. It explains the causal chain through income, though it omits explicit mention of the full mediation and confounding nuances. Overall, the counterfactual reasoning aligns with the expected intervention outcome."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables, accurately identifies which are affected and which are not, clearly explains the mediating pathway from Education to Income to Health, and aligns with the counterfactual logic of the intervention. All elements of the ground truth are captured without error."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unchanged. It explains the causal chain via education \u2192 income \u2192 health, though it omits an explicit statement that there is no direct education\u2192health edge. Overall reasoning aligns with the counterfactual logic of the intervention."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, failing to detect that no flaws exist and thus misclassifying non\u2011existent issues. While it provided reasoning, the justification was not sound relative to the given model, meriting low scores on detection, classification, and false\u2011positive avoidance, with only modest credit for explanatory effort."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed the DAG had flaws, identifying missing reciprocal links and omitted variables that are not part of the specified model. This constitutes a false positive. While it correctly noted the existing edges and some general social science points, its overall reasoning was unsound for the given DAG."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The DAG is intentionally simplified and contains no flaws; the LLM incorrectly treats omitted variables and missing feedback loops as defects, failing to recognize the model's intended scope. Although it offers detailed reasoning, its conclusions are unfounded for this specific causal graph, resulting in poor flaw detection and false positives."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG and accurately describes the collider at TB or Cancer and the multi-path structure. It is clear and faithful, but it does not explicitly state the absence of a direct Smoking\u2192Dyspnoea edge or that Tuberculosis influences Dyspnoea and X-Ray only through TB or Cancer, which slightly reduces completeness."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges, accurately describes the collider, forks, and mediating pathways, and covers every explanation point from the ground truth. It uses clear, accessible language and does not introduce any relationships not present in the DAG."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 5,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG, accurately describes the collider structure at 'TB or Cancer', and covers all seven explanation points from the ground truth. It uses clear, accessible language and does not invent any relationships not present in the original graph."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts the direction of change for all variables, accurately identifies which factors are affected and which remain unchanged, explains the propagation of effects through the DAG, and aligns its reasoning with the expected counterfactual outcome."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts the direction of change for all variables and accurately identifies which are affected versus unaffected. Its causal reasoning aligns with the expected counterfactual outcome, though the explanation of the mechanism omits explicit mention of the collider nature of 'TB or Cancer' and the specific pathways through which Tuberculosis influences Dyspnoea and X-Ray Result."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unaffected. The causal reasoning matches the expected counterfactual outcome. The mechanism explanation is mostly correct but omits explicit mention of the collider nature of the 'TB or Cancer' node, resulting in a minor gap."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly asserted that the DAG contains flaws, citing missing variables and ambiguous factors, despite the DAG being defined as correct with no flaws. This leads to poor scores on flaw detection, classification, and false\u2011positive avoidance. However, its critique is detailed and logically reasoned, warranting a high score for explanation quality."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 5,
+        "flaw_classification": 5,
+        "false_positive_avoidance": 5,
+        "explanation_quality": 5
+      },
+      "justification": "The LLM correctly judged the DAG as fundamentally sound, identified no flaws, and provided detailed, medically grounded reasoning to support its assessment, thereby avoiding false positives and justifying its stance thoroughly."
+    },
+    {
+      "llm": "gemini-2.5-flash",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly asserted that the DAG has missing factors, thereby failing to detect that the provided DAG contains no flaws. Consequently, it misclassified the (non\u2011existent) flaw and invented flaws where none exist. While its explanation is detailed and medically plausible, it is not sound with respect to the specific DAG under evaluation."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges and recognizes the chain pattern. It covers most explanation points but omits an explicit statement that there is no direct arrow from smoking to death. Language is clear and no extra relationships are invented."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the three nodes and the two edges, and recognizes the chain pattern. It clearly explains the indirect influence of smoking on death via cancer in accessible language without adding false relationships. However, it does not explicitly state that cancer is a mediator, that smoking affects death only indirectly, or that there is no direct arrow from smoking to death, and it lacks a clear counterfactual intervention statement, reducing completeness."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges (smoking\u2192cancer\u2192death) and recognizes the chain pattern. However, it does not explicitly state that cancer is a mediator, that smoking affects death only indirectly through cancer, or that there is no direct arrow from smoking to death, missing key explanation points. The language is clear and accessible, and no extra relationships are invented."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 4,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts decreases in cancer and death after stopping smoking, showing proper direction. It identifies cancer and death as affected variables and notes that the cancer\u2192death influence remains unchanged, though it omits explicitly listing smoking as a changed variable. The mechanism is clearly explained as the removal of smoking's effect on cancer leading to reduced death risk, and the counterfactual reasoning aligns with the expected indirect effect via the mediator."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly states that stopping smoking reduces smoking, cancer, and death, with the effect on death mediated through cancer. It accurately identifies which variables change and notes that the causal link between cancer and death remains unchanged. The explanation of the propagation pathway and the counterfactual logic aligns fully with the ground truth."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that stopping smoking reduces cancer risk and subsequently reduces death risk, aligning with the direction of effects. It accurately identifies the affected variables (smoking, cancer, death) and notes that unrelated factors like diet are not directly affected. The explanation details the mediating role of cancer and the indirect effect on death, matching the expected counterfactual logic."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct DAG, suggesting missing variables and oversimplification, which constitutes a false positive. While it provided reasoned justification for its critique, the assessment itself was wrong, leading to low scores on flaw detection, classification, and false positive avoidance."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 2,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM correctly affirmed the direction of the edges but incorrectly treated omitted variables as flaws, failing to recognize that the given DAG is intentionally simplified and thus contains no flaws. Consequently, its flaw detection and classification are weak, it invented false positives, and its justification, while detailed, does not align with the task's definition of a flaw."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claims that the DAG has flaws, when the provided graph is correct and has no missing or reversed edges. Its critique introduces external factors not part of the model, leading to false positives. While it offers reasoning, the justification is unsound because it mistakes omitted variables for flaws in the given causal chain."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG, showing structural accuracy and faithfulness. It captures the chain and fork patterns but does not explicitly use confounder/mediator terminology or note the absence of a direct Education\u2192Health edge, leading to partial pattern recognition and missing several explanation points, affecting completeness. The language is clear and accessible."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all four variables and the directed edges present in the DAG, showing good structural accuracy and faithfulness. It captures the confounding role of Family Background and the mediating chain via Income, but omits explicit statements about full mediation, bias from omitting the confounder, and the total effect flowing through Income, reducing pattern recognition and completeness. The language is clear and accessible."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges of the DAG and uses clear, accessible language. However, it only implicitly captures the confounder and mediator concepts and omits explicit discussion of bias from uncontrolled confounding and the absence of a direct Education\u2192Health edge, reducing completeness and pattern recognition."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts increases in education, income, and health, with no change in family background, and explains the mediated pathway via income, matching the expected counterfactual logic."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 3,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and correctly identifies which variables are affected or unaffected. It explains the causal chain from education to income to health, but omits explicit mention of mediation, confounding, and the absence of a direct education\u2011health edge, weakening the mechanism explanation. The counterfactual reasoning aligns with the expected logic of the intervention."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 3,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and identifies which are affected. It accurately describes the causal chain education \u2192 income \u2192 health, matching the counterfactual logic. However, it omits explicit discussion of income as a mediator, family background as a confounder, and the absence of a direct education\u2011health edge, leaving gaps in the mechanism explanation."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct DAG, proposing bidirectionality and missing variables that are not part of the given model. Its reasoning, while plausible in a broader real\u2011world context, does not apply to the simplified causal graph provided, resulting in poor flaw detection and classification."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, showing poor flaw detection and classification, and invented false positives. However, its critique offered plausible reasoning about bidirectionality and missing variables, which reflects some sound justification despite being misapplied."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, asserting bidirectional influences and missing variables that are not part of the given model. While it correctly noted that Family Background\u2192Education and Education\u2192Income are plausible, its overall assessment of flaws is wrong, leading to poor flaw detection and classification. Its reasoning contains some valid points but misapplies them to invent flaws, resulting in low explanation quality."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 4,
+        "pattern_recognition": 3,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges of the DAG without adding false relationships, showing strong structural accuracy and faithfulness. It captures the main chains but does not explicitly name the collider pattern at TB or Cancer or mention the absence of a direct Smoking\u2192Dyspnoea edge, leading to partial pattern recognition and completeness. The language is clear and accessible."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": ""
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG, showing perfect structural accuracy. It captures the causal chains and forks but does not explicitly label the TB or Cancer node as a collider, which lowers pattern recognition and completeness scores. The language is clear and accessible, and no extra relationships are invented, ensuring high clarity and faithfulness."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM's response correctly predicts the direction of change for all variables, identifies which are affected and which are not, explains the propagation pathways through the DAG, and matches the expected counterfactual logic from the ground truth."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unaffected. It explains the propagation of effects through the graph, though it omits explicit mention of the collider nature of 'TB or Cancer'. Overall causal reasoning aligns with the expected counterfactual outcome."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 4
+      },
+      "justification": "The response correctly identifies the direction of change for all variables and which are affected/unaffected. It explains most of the propagation paths but omits the explicit TB or Cancer \u2192 Dyspnoea pathway, making the mechanism and counterfactual reasoning slightly incomplete."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly claimed multiple flaws in a correct DAG, failing to detect that there are none and thus scoring poorly on flaw detection, classification, and false\u2011positive avoidance. While it offered some plausible\u2011sounding reasoning about the links, its justification rests on misunderstandings of the DAG\u2019s semantics, resulting in only moderate explanation quality."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, failing to detect that there are none. Its classifications of reversed/spurious/missing flaws are unfounded, and it invented issues where none exist. While it offered some plausible-sounding reasoning, the overall assessment is unsound, warranting low scores across the board."
+    },
+    {
+      "llm": "llama-3.3-70b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM claimed multiple flaws in a DAG that has none, failing to detect the absence of flaws and incorrectly classifying non-existent issues. It invented false positives and its justification, while containing some correct statements, rests on mistaken premises."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges, recognizes the chain pattern, and uses clear, accessible language without inventing extra relationships. It covers most explanation points but does not explicitly state that there is no direct arrow from smoking to death or that the effect on death is only indirect, resulting in minor incompleteness."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges (smoking\u2192cancer, cancer\u2192death) and recognizes the chain pattern. It conveys the indirect effect and lack of a direct smoking\u2192death link, though it does not explicitly state all explanation points, resulting in minor incompleteness. Language is clear and no extra relationships are invented."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges and recognizes the causal chain, showing good structural accuracy and pattern recognition. However, it does not explicitly state the explanation points about root cause, mediation, indirect effect, and absence of direct edge, reducing completeness. The language is clear and no extra relationships are invented."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that stopping smoking reduces cancer risk, which in turn reduces death risk, matching the expected direction of change. It accurately identifies the variables affected (smoking, cancer risk, death risk) and notes that unrelated factors are unchanged, aligning with the DAG scope. The explanation of the indirect, delayed effect through cancer matches the mechanistic chain, and the counterfactual reasoning mirrors the ground truth."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 1,
+        "scope_correctness": 1,
+        "mechanism_explanation": 1,
+        "causal_reasoning": 1
+      },
+      "justification": "The LLM's response is truncated after the title and the beginning of a list, providing no actual analysis of the intervention. Consequently, it fails to address direction, scope, mechanism, or causal reasoning for the counterfactual scenario."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 1,
+        "scope_correctness": 1,
+        "mechanism_explanation": 1,
+        "causal_reasoning": 1
+      },
+      "justification": "The LLM's response was not provided in the prompt, making it impossible to evaluate any aspect of the answer. Consequently, all metrics are scored as completely wrong or missing."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct DAG, claiming missing mediators, confounders, and competing causes. Since the DAG has no flaws, its flaw detection and classification are wrong, and it failed to avoid false positives. However, its explanation provided detailed reasoning about potential missing factors, showing some internal coherence, which warrants a moderate score for explanation quality."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, misclassified them, and invented false positives. While its critique is detailed, it misapplies reasoning to a structure that is intentionally simplified and correct for the task."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed the DAG had flaws, failing to recognize that the simplified chain is intentionally minimal and correct for the task. Consequently, its flaw detection and classification are wrong, and it did not avoid inventing false positives. While its explanation includes some accurate observations about real-world complexity, it misapplies them to the given DAG, resulting in poor explanation quality for this specific critique task."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all four nodes and the four edges of the DAG, showing strong structural accuracy and faithfulness. It captures the confounder role of family background and the mediating chain via income, but it does not explicitly state that the education\u2011health effect is fully mediated, that omitting family background biases the estimate, or that there is no direct education\u2011health edge, reducing pattern recognition and completeness. The language is clear and accessible."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly lists all nodes and edges from the DAG and avoids inventing any relationships, using clear and accessible language. However, it does not explicitly identify income as a mediator of the education\u2011health effect, note that the total effect of education on health flows through income, mention the bias from omitting family background, or state that there is no direct education\u2011health edge, missing several key explanation points."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG and accurately describes the confounding role of family background and the mediating role of income, demonstrating proper pattern recognition. However, it omits explicit statements about bias from omitting family background, the total effect flowing solely through income, and the absence of a direct education\u2011health edge, reducing completeness. The language is clear and accessible, and no extraneous relationships are introduced."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 4
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected. It explains the mediating role of income and the unchanged family background, though it slightly misstates that the health improvement is only partial due to family background's direct effect, which confuses the mediated effect with baseline differences."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unchanged. It explains the mediating role of income and notes the persistence of family background's direct influence on health, though it does not explicitly state the absence of a direct Education\u2192Health edge. Overall, the causal reasoning aligns with the expected counterfactual logic."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unchanged. It explains the mediating pathway Education \u2192 Income \u2192 Health, though it omits explicit mention of the absence of a direct Education\u2192Health edge and the confounding bias nuance. Overall causal reasoning aligns with the counterfactual expectation."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly claimed multiple missing edges and factors as flaws, failing to recognize that the provided DAG is intentionally correct with no flaws. Consequently, its flaw detection and classification are wrong, and it did not avoid inventing false positives. While some of its reasoning about plausibility and omitted variables is sound, it ultimately misapplies that reasoning, resulting in only partially correct justification."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly flagged multiple flaws in a correct DAG, treating omitted variables and bidirectionality as mistakes, which shows poor flaw detection and classification and fails to avoid false positives. Although its explanation is detailed, it rests on faulty premises, lowering the quality of its justification."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that is actually correct, failing to detect that there are no flaws. Its classifications of flaw types are therefore wrong, and it invented false positives. While the critique includes some plausible social considerations, they do not correspond to actual misspecifications in the given causal model, resulting in poor explanation quality."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges, showing full structural accuracy and faithfulness. It captures the key patterns (convergence/fork) but does not explicitly label the collider or fork, and omits a few nuanced points about mediation, leading to minor gaps in pattern recognition and completeness. Language is clear and accessible."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG, showing perfect structural accuracy. It captures the multi-path and collider nature of the graph, though it does not explicitly use the term 'collider' or emphasize the 'only' qualifiers for some relationships, leading to minor gaps in pattern recognition and completeness. The explanation is clear, accessible, and faithful to the DAG with no invented relationships."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly lists all nodes and edges from the DAG and accurately captures the collider (TB or Cancer) and fork (Smoking) patterns. It covers nearly all explanation points, though it does not explicitly state that tuberculosis affects dyspnoea and x-ray results solely through the TB or Cancer node, which slightly reduces completeness. The language is clear and accessible, and no relationships not present in the DAG are introduced."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and correctly identifies which are affected/unaffected. It explains the propagation pathways well, though it omits explicit mention of the collider nature of TB or Cancer and the lack of a direct Smoking\u2192Dyspnoea edge. Overall causal reasoning aligns with the expected counterfactual."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly predicts the direction of change for every variable, accurately identifies which nodes are affected versus unaffected, explains how the influence propagates through direct and indirect paths (including the TB or Cancer collider), and applies sound counterfactual reasoning, noting that tuberculosis remains unchanged unless already present."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 3,
+        "causal_reasoning": 4
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unaffected. However, the mechanism explanation contains an erroneous claim that bronchitis indirectly reduces TB or Cancer and omits explicit mention of the collider structure and tuberculosis's mediated effects, weakening the causal propagation description. Overall counterfactual reasoning aligns with the expected outcome aside from that minor misstep."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The ground truth states the DAG has no flaws, yet the LLM identified several supposed issues (missing smoking\u2192TB edge, problematic TB or Cancer node, omitted variables). This constitutes incorrect flaw detection and classification, and introduces false positives. While the LLM provided detailed reasoning, it was based on mistaken premises, reducing the soundness of its justification."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 1
+      },
+      "justification": "The LLM incorrectly claimed the DAG contains flaws when the ground truth indicates none, misclassified non\u2011existent flaws, invented false positives, and offered reasoning that is unsound given the correct causal structure."
+    },
+    {
+      "llm": "qwen3-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 4
+      },
+      "justification": "The LLM incorrectly identified multiple flaws in a DAG that the ground truth states has none, showing poor flaw detection and classification. It also invented flaws, failing false positive avoidance. However, its critique was supported by detailed, medically plausible reasoning, making the explanation quality relatively strong despite the mistaken conclusion."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the three nodes and the two edges of the DAG and clearly describes the chain pattern. However, it omits explicit statements that cancer is a mediator, that smoking affects death only indirectly, and that there is no direct arrow from smoking to death, which reduces completeness. The language is accessible and no extra relationships are introduced."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges and recognizes the chain pattern. However, it omits explicit statements about smoking being the root cause, cancer as a mediator, the indirect-only effect of smoking on death, and the absence of a direct smoking\u2192death arrow, reducing completeness. Language is clear and no extra relationships are invented."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the three nodes and two edges, and clearly describes the chain pattern. It captures the indirect effect and practical implications but does not explicitly state all four ground\u2011truth explanation points (root cause, mediator, no direct arrow). Language is accessible and no extra relationships are introduced."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM correctly states that stopping smoking reduces smoking, which lowers cancer risk and subsequently reduces deaths caused by cancer, matching the expected direction of change. It accurately identifies which variables are affected (smoking, cancer, death) and notes that other influences on death remain unchanged, explaining the indirect mediation through cancer and aligning with counterfactual reasoning."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that stopping smoking reduces smoking, leading to lower cancer rates and subsequently lower death rates, capturing the correct direction of change. It accurately identifies which variables are affected (smoking, cancer, death) and notes the delayed impact on existing cases, showing proper scope. The explanation of the causal chain and the indirect effect on death aligns with the expected counterfactual logic."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 4,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly identifies the direction of change for all variables (smoking stops, cancer risk down, death risk down). It mostly captures which variables are affected versus unaffected, noting that existing cancer status may not change, though it could be clearer about the lack of a direct smoking\u2192death effect. The mechanism and counterfactual reasoning are well articulated, showing how the intervention propagates through the chain."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, so flaw detection and classification are poor. It invented false positives, lowering false_positive_avoidance. Its explanation offered plausible but irrelevant considerations, showing moderate reasoning quality."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed that the DAG has flaws (missing factors) when the given chain is correct and complete for the specified variables. Consequently, its flaw detection and classification are wrong, and it failed to avoid inventing false positives. While it offered some plausible statements about the directions and links, its overall justification rests on a mistaken premise, limiting explanation quality."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed the DAG had missing factors, when the ground truth indicates no flaws. It therefore failed flaw detection and classification, and invented false positives. Its explanation, while noting some correct aspects, is based on the mistaken premise and thus lacks sound justification."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG and avoids inventing extra relationships, earning full marks for structural accuracy and faithfulness. It recognizes the confounder and mediation chains but omits key points about Income as a mediator, the full mediation of Education's effect, bias from uncontrolled confounding, and the absence of a direct Education\u2192Health edge, reducing pattern recognition and completeness. The language is clear and accessible."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 4,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 4
+      },
+      "justification": "The response correctly lists all nodes and the existing edges, but omits the absence of a direct Education\u2192Health edge. It captures the confounder and mediator ideas but misses key nuances like full mediation and bias from omitting Family Background. It covers only a subset of the required explanation points, yet the language is clear and mostly faithful, with only a slight ambiguity about whether Family Background directly affects Income."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges in the DAG, showing perfect structural accuracy and faithfulness. It recognizes the confounder role of Family Background and the mediated chain via Income, but fails to explicitly label Income as a mediator, note the absence of a direct Education\u2192Health edge, or discuss bias from omitting Family Background, leading to partial pattern recognition and incomplete coverage of the expected explanation points. Language is clear and accessible."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables, accurately identifies which variables are affected and which are not, explains the causal pathway through income as the mediator, and aligns with the counterfactual logic of the intervention."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and correctly identifies which are affected versus unchanged. It explains the causal chain Education \u2192 Income \u2192 Health, though it omits an explicit statement that there is no direct Education \u2192 Health edge. The counterfactual reasoning aligns with the expected outcome, noting that family background remains unchanged and the effect on health is fully mediated via income."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unchanged. It explains the mediating role of income and the unchanged family background influence, though it omits explicit mention of the absence of a direct Education\u2192Health edge and the confounding bias nuance. Overall causal reasoning aligns with the expected counterfactual outcome."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed limitations in the DAG, failing to recognize that the presented graph is correct and has no flaws. Consequently, it misclassified non\u2011existent issues and invented flaws where none exist. While its reasoning about missing factors and bidirectionality is plausible in a broader context, it does not apply to the given causal model, resulting in weak explanation quality for this task."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed the DAG had flaws (missing variables, bidirectional effects, feedback loops) when the ground truth specifies no flaws. This shows poor flaw detection and classification, and a failure to avoid false positives. While its explanation offers plausible general critiques, it misapplies them to this specific task, weakening the justification."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 2,
+        "false_positive_avoidance": 2,
+        "explanation_quality": 3
+      },
+      "justification": "The response correctly notes that the directions and links are plausible, but incorrectly treats the simplified DAG as flawed by pointing out missing variables and feedback loops that are not part of the specified model. Consequently, it fails to detect that there are no flaws and invents false positives, while its justification, though reasoned, rests on an incorrect premise."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 4,
+        "completeness": 5,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG and accurately describes the causal pathways, covering all ground\u2011truth explanation points. It recognizes the collider and fork structures implicitly but does not explicitly label them, resulting in a slight deduction for pattern recognition. Language is clear, accessible, and faithful to the graph with no invented relationships."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG, showing strong structural accuracy and faithfulness. However, it only implicitly mentions key patterns like the collider nature of TB or Cancer and the exclusive determiners of X-Ray Result and Dyspnoea, leading to gaps in pattern recognition and completeness. The language is clear and accessible, and no spurious relationships are introduced."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 3,
+        "completeness": 4,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges from the DAG, showing full structural accuracy and faithfulness. It captures chains and forks but does not explicitly label the TB or Cancer node as a collider, resulting in partial pattern recognition. Most explanation points are covered, though the collider concept is implicit rather than explicit, slightly affecting completeness."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM response correctly predicts the direction of change for all variables, accurately distinguishes which factors are affected versus unaffected, explains how the effect propagates through the DAG, and matches the expected counterfactual outcome of quitting smoking."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected versus unaffected. It explains the causal pathways from smoking to dyspnoea and X-ray results, though it does not explicitly label TB or Cancer as a collider. Overall, the counterfactual reasoning aligns with the expected logic."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The LLM's response correctly predicts the direction of change for all variables, accurately identifies which factors are affected and which remain unchanged, explains the propagation of effects through the DAG, and aligns with the expected counterfactual logic from the ground truth."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in a DAG that the ground truth deems flawless, so flaw detection and classification are wrong. It invented issues, failing false positive avoidance. Its explanation contains some correct observations (e.g., smoking \u2192 lung cancer/bronchitis) but is largely unsound, warranting a low score for explanation quality."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in a correct DAG, misunderstanding the purpose of the 'TB or Cancer' collider node and proposing unnecessary changes. It failed to detect that there are no flaws, misclassified nonexistent issues, and invented flaws, while offering only weak justification for its critique."
+    },
+    {
+      "llm": "magistral-medium",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct DAG, failing to recognize that there are none, thus misclassifying the non\u2011existent flaw and inventing false positives. Its explanation included a few accurate observations about edge directions but overall reasoning was unsound."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges and recognizes the chain pattern. However, it omits explicit statements about cancer being a mediator, smoking affecting death only indirectly, and the absence of a direct smoking\u2192death arrow, reducing completeness. Language is clear and no extra relationships are introduced."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies the nodes and edges and recognizes the chain pattern. It clearly explains the relationships in accessible language without adding false links. However, it omits explicit statements about cancer being a mediator, the indirect nature of smoking's effect on death, and the absence of a direct smoking\u2192death arrow, reducing completeness."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 5,
+        "pattern_recognition": 5,
+        "completeness": 3,
+        "clarity": 5,
+        "faithfulness": 5
+      },
+      "justification": "The response correctly identifies all nodes and edges and clearly describes the chain pattern. However, it omits explicit statements about smoking being the root cause, cancer as a mediator, the indirect-only effect of smoking on death, and the absence of a direct smoking\u2192death arrow, affecting completeness. The language is clear and no extra relationships are invented."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that smoking, cancer, and death all decrease after cessation, accurately identifies which variables are affected and which remain unchanged, explains the mediating role of cancer and the chain of effects, and aligns with the expected counterfactual logic of an indirect effect on death."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts that stopping smoking reduces smoking, cancer risk, and death risk, all in the expected directions. It accurately identifies which variables are affected (smoking, cancer, death) and which are not, and explains the indirect propagation of the effect through the mediator cancer, matching the counterfactual logic."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 5,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly states that smoking, cancer, and death all decrease after smoking cessation, matching the expected direction of change. It accurately identifies which variables are affected and notes that other influences on death remain unchanged, and it explains the causal chain through which the intervention affects death indirectly via cancer."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified missing variables as flaws in a DAG that is intentionally simplified, failing to recognize that the chain is correct as given. Consequently, it misclassified the non\u2011existent flaws and introduced false positives, while its explanation, though noting the correct directions, treats omitted factors as shortcomings."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly claimed flaws in the correct DAG, citing missing variables and potential feedback loops that are not actually flaws in the given simple chain. It did not confirm the DAG's correctness, resulting in poor flaw detection and classification. While it provided reasoning for its claims, the reasoning misapplies critique to a correct model, lowering explanation quality."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L1_smoking_cancer",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly treated the omission of age, genetics, etc. as flaws, when the given DAG is intentionally a simple causal chain with no missing variables. Consequently it failed to detect the absence of flaws and invented false positives, though it offered some reasoning about why those factors might matter."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 3,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 2
+      },
+      "justification": "The response correctly identifies three of the four edges (Family Background\u2192Education, Education\u2192Income, Income\u2192Health) but misrepresents the Family Background\u2192Health edge as indirect only through Education and implies a direct Education\u2192Health effect that is absent. It captures the mediation chain but fails to recognize the confounding role of Family Background and omits most of the expected explanation points, while the language is clear and accessible."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 3,
+        "pattern_recognition": 3,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 2
+      },
+      "justification": "The response correctly lists all four nodes and gets three of the four edges right, but it misses the direct Family Background \u2192 Health edge and incorrectly describes its influence as indirect through Education. It captures the fork and mentions mediation but fails to identify Income as the mediator of the Education\u2011Health relationship and omits several key explanation points, while adding an unsupported indirect path (Family Background \u2192 Education \u2192 Health) that is not in the DAG."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 3,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 5,
+        "faithfulness": 2
+      },
+      "justification": ""
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 4,
+        "mechanism_explanation": 3,
+        "causal_reasoning": 2
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and correctly identifies which are affected. However, it incorrectly asserts a direct effect of education on health and omits key points about full mediation through income and confounding bias, weakening the mechanistic and causal reasoning."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 3,
+        "causal_reasoning": 3
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and correctly identifies which factors are affected or unaffected. However, it incorrectly asserts a direct effect of education on health, missing the key point that the effect is fully mediated by income, which weakens the mechanism explanation and causal reasoning."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 3,
+        "causal_reasoning": 3
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and identifies which are affected/unaffected. However, it adds pathways not in the DAG (e.g., health literacy) and fails to emphasize that the effect is fully mediated by Income with no direct Education\u2192Health edge, nor does it address confounding bias."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 2,
+        "false_positive_avoidance": 2,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM correctly described the directional plausibility of each edge but incorrectly suggested missing variables and possible bidirectionality, failing to recognize the DAG as flawless. This led to false positives and misclassification, while its reasoning was partially sound but ultimately off-target."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 2,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 3
+      },
+      "justification": "The LLM incorrectly asserted that the DAG has missing factors and possible bidirectional relationships, failing to recognize that the provided DAG is considered correct for the task. Consequently, its flaw detection and classification are wrong, and it invented flaws where none exist. However, it did provide plausible reasoning for its claims, showing moderate explanatory quality."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L2_education_income_health",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM failed to recognize that the DAG is correct, instead suggesting missing variables and questioning the Income\u2192Health direction, indicating poor flaw detection and classification. It invented flaws where none exist, violating false\u2011positive avoidance. While it offered some plausible reasoning about the existing links, its overall assessment was unsound, resulting in low explanation quality."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 1,
+      "scores": {
+        "structural_accuracy": 2,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 4,
+        "faithfulness": 2
+      },
+      "justification": "The response correctly identifies some basic links (Asia\u2192TB, Smoking\u2192Lung Cancer/Bronchitis, TB or Cancer\u2192X-Ray/Dyspnoea, Bronchitis\u2192Dyspnoea) but adds several false edges (TB\u2192Lung Cancer/Bronchitis, Bronchitis\u2192TB or Cancer) and misses key concepts like the collider nature of TB or Cancer and the indirect-only influence of Smoking on Dyspnoea. While the language is clear, the invented relationships reduce faithfulness and completeness."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 2,
+      "scores": {
+        "structural_accuracy": 2,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 4,
+        "faithfulness": 2
+      },
+      "justification": ""
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "explanation",
+      "trial": 3,
+      "scores": {
+        "structural_accuracy": 2,
+        "pattern_recognition": 2,
+        "completeness": 2,
+        "clarity": 4,
+        "faithfulness": 2
+      },
+      "justification": ""
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 1,
+      "scores": {
+        "direction_correctness": 5,
+        "scope_correctness": 5,
+        "mechanism_explanation": 4,
+        "causal_reasoning": 5
+      },
+      "justification": "The response correctly predicts the direction of change for all variables and accurately identifies which are affected or unaffected. It describes the causal pathways from smoking to lung cancer/bronchitis and onward to TB or Cancer, X-Ray, and Dyspnoea, but omits explicit discussion of the collider nature of TB or Cancer and the mediation of tuberculosis effects through that node. Overall, the causal reasoning matches the expected counterfactual outcome."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 2,
+      "scores": {
+        "direction_correctness": 3,
+        "scope_correctness": 3,
+        "mechanism_explanation": 2,
+        "causal_reasoning": 3
+      },
+      "justification": "The response correctly identifies that quitting smoking reduces lung cancer, bronchitis, X-ray abnormalities, and dyspnoea, but incorrectly suggests tuberculosis may decrease and is ambiguous about the effect on the TB or Cancer collider. It omits key mechanistic details such as the collider nature of TB or Cancer and the fact that tuberculosis is unaffected, leading to incomplete and partially inaccurate causal reasoning."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "counterfactual",
+      "trial": 3,
+      "scores": {
+        "direction_correctness": 3,
+        "scope_correctness": 2,
+        "mechanism_explanation": 2,
+        "causal_reasoning": 2
+      },
+      "justification": "The response correctly predicts the direction of change for smoking, lung cancer, and bronchitis, but incorrectly suggests smoking affects tuberculosis, leading to wrong direction for TB. It identifies smoking-related variables as affected but falsely includes TB and omits explicit discussion of TB or Cancer, X-Ray Result, and Dyspnoea. Mechanism explanation mentions the indirect paths but misses the collider nature of TB or Cancer and incorrectly invokes smoking as a TB risk factor, weakening causal reasoning."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 1,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified flaws in a correct DAG, citing missing variables and a misleading link that are not considered flaws in the ground truth. Consequently, its flaw detection and classification are wrong, and it failed to avoid false positives. While it provided detailed reasoning, the reasoning is based on incorrect premises, limiting the quality of its explanation."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 2,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM failed to recognize that the DAG is correct, instead suggesting missing factors and vagueness as flaws, which are false positives. It did not correctly classify any flaw type, and its justification, while medically plausible, does not support a valid critique of the given DAG."
+    },
+    {
+      "llm": "c4ai-aya-expanse-32b",
+      "dag_id": "L3_asia_correct",
+      "task_type": "critique",
+      "trial": 3,
+      "scores": {
+        "flaw_detection": 1,
+        "flaw_classification": 1,
+        "false_positive_avoidance": 1,
+        "explanation_quality": 2
+      },
+      "justification": "The LLM incorrectly identified flaws in the DAG (e.g., claiming the Lung Cancer \u2192 TB or Cancer edge is redundant/misleading and listing missing variables), when the ground truth indicates no flaws. Consequently, it failed to detect the absence of flaws and misclassified the supposed issues. While it offered some plausible statements about certain edges, its overall reasoning was unsound and based on misunderstandings."
+    }
+  ]
+}

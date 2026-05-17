@@ -1,0 +1,4 @@
+task_type,mean,max
+counterfactual,0.341,2.309
+critique,0.309,2.036
+explanation,0.182,0.416

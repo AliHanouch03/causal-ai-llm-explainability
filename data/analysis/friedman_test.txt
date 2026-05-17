@@ -1,0 +1,13 @@
+=== Friedman Test ===
+H0: All LLMs perform equally
+H1: At least one LLM differs significantly
+
+Sample blocks (complete cases): 144
+LLMs compared: ['c4ai-aya-expanse-32b', 'gemini-2.5-flash', 'gemini-3-flash-preview', 'llama-3.3-70b', 'magistral-medium', 'qwen3-32b']
+
+Test statistic: 62.2242
+p-value: 0.000000
+
+Interpretation:
+✓ SIGNIFICANT — at least one LLM differs (p < 0.05)
+✓ HIGHLY SIGNIFICANT (p < 0.001)

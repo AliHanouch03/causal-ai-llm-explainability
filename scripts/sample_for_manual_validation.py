@@ -84,7 +84,7 @@ def sample_responses(results_dir="data/results", output_file="data/manual_valida
                 preview,
                 r["response"],
             ]
-            # Empty cells for manual scoring (only fill metrics relevant to task)
+            # Empty cells for manual scoring 
             relevant_metrics = set(metric_columns[r["task_type"]])
             for m in all_metrics:
                 row.append("" if m in relevant_metrics else "N/A")
@@ -92,10 +92,6 @@ def sample_responses(results_dir="data/results", output_file="data/manual_valida
             writer.writerow(row)
     
     print(f"✅ Sampled {len(sampled)} responses to: {output_path}")
-    print(f"\nNext steps:")
-    print(f"  1. Open the CSV in Excel/Google Sheets")
-    print(f"  2. Read each response and score relevant metrics 1-5")
-    print(f"  3. Save and run scripts/compare_manual_vs_judge.py")
 
 
 if __name__ == "__main__":

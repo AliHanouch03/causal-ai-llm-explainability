@@ -1,6 +1,5 @@
 """
 Compare manual scores against the LLM judge's scores.
-Computes inter-rater agreement metrics.
 """
 
 import json
@@ -80,7 +79,7 @@ def compute_agreement(manual, judge_lookup):
                 total += 1
 
     if total == 0:
-        print("❌ No matched scores to compare. Maybe you didn't fill in the CSV?")
+        print("❌ No matched scores to compare. Maybe you didn't fill in the CSV!")
         return
 
     print(f"\n=== Inter-rater Agreement (Manual vs LLM Judge) ===")
@@ -90,7 +89,7 @@ def compute_agreement(manual, judge_lookup):
     print(f"Within 1 point rate:        {within_one/total*100:.1f}%")
     
     if unmatched:
-        print(f"\n⚠️  {len(unmatched)} manual entries had no matching judge score")
+        print(f"\n!!!  {len(unmatched)} manual entries had no matching judge score")
 
     print(f"\n--- Per-metric breakdown ---")
     for metric, vals in sorted(per_metric.items()):
